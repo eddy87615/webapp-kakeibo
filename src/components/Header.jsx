@@ -9,10 +9,10 @@ function Header({ linkName, link }) {
 
   const handleClick = (event) => {
     event.preventDefault();
-    // 添加短暂延迟，以确保动画效果显示
+    // delay
     setTimeout(() => {
       navigate(link);
-    }, 300); // 延迟时间与动画时间一致
+    }, 300); // set
   };
 
   return (
