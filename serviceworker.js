@@ -12,10 +12,10 @@ const registerServiceWorker = async () => {
       } else if (registration.waiting) {
         console.log('已安装 Service worker installed');
       } else if (registration.active) {
-        console.log('激活 Service worker');
+        console.log('啟動 Service worker');
       }
     } catch (error) {
-      console.error(`注册失败：${error}`);
+      console.error(`註冊失敗：${error}`);
     }
   }
 };
