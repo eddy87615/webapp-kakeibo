@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-function Header({ linkName, link }) {
+function HeaderBtn({ linkName, link, id }) {
   const navigate = useNavigate();
 
   const handleClick = (event) => {
@@ -18,7 +18,7 @@ function Header({ linkName, link }) {
   return (
     <div>
       <div className="header">
-        <Link to={link} className="headerBtn" onClick={handleClick}>
+        <Link to={link} className="headerBtn" onClick={handleClick} id={id}>
           {linkName}
         </Link>
       </div>
@@ -26,4 +26,4 @@ function Header({ linkName, link }) {
   );
 }
 
-export default Header;
+export default HeaderBtn;

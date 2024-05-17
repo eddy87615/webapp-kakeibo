@@ -1,0 +1,114 @@
+.switchInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10% 0;
+}
+
+.switchBtn {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+
+  padding: 8px 24px;
+  margin: 12px;
+
+  background-color: #fff;
+
+  border: solid 5px #000;
+  border-radius: 15px;
+
+  box-shadow: 4px 4px 0 0 black;
+
+  transition: 0.3s;
+}
+
+.inputArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 80%;
+
+  margin: 0 auto;
+}
+
+.inputbox {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+
+  font-size: 30px;
+  font-weight: bold;
+
+  width: 100%;
+
+  margin-bottom: 10%;
+}
+
+.inputbox input {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+
+  height: 50px;
+  width: 70%;
+
+  font-size: 25px;
+  font-weight: bold;
+
+  border: solid 5px black;
+  border-radius: 15px;
+}
+
+.inputMemo {
+  display: flex;
+  width: 100%;
+  margin-bottom: 8%;
+}
+
+.inputMemo textarea {
+  height: 150px;
+  width: 100%;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  border: solid 5px black;
+  border-radius: 15px;
+}
+
+.switchBtnPressedSpend {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+  transition: 0.3s;
+  background-color: #ffa9a9;
+}
+.switchBtnPressedIncome {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+  transition: 0.3s;
+  background-color: #fcb733;
+}
+
+.submitBtn {
+  font-size: 30px;
+  font-weight: bold;
+
+  border: solid 5px black;
+  border-radius: 15px;
+
+  background-color: #fff;
+  box-shadow: 4px 4px 0 0 black;
+
+  padding: 10px 48px;
+
+  transition: 0.2s;
+}
+.submitBtn:active {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+  transition: 0.3s;
+}
