@@ -18,7 +18,7 @@
   box-shadow: 4px 4px 0 0 black;
 }
 
-.headerBtn:hover {
+.headerBtn:active {
   box-shadow: none;
   transform: translate(4px, 4px);
   transition: 0.1s;
