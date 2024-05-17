@@ -8,13 +8,13 @@
 
 .homeSpend {
   background-color: #ffc3bb;
-  width: 100svw;
-  height: 100svh;
+  width: 100vw;
+  height: 100dvh;
 }
 .homeIncome {
   background-color: #fcd894;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
 }
 
 #calendar {

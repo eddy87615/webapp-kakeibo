@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
 
-  margin: 10% 0;
+  margin: 8% 0;
 }
 
 .switchBtn {
@@ -45,7 +45,7 @@
 
   width: 100%;
 
-  margin-bottom: 10%;
+  margin-bottom: 4%;
 }
 
 .inputbox input {
@@ -66,7 +66,7 @@
 .inputMemo {
   display: flex;
   width: 100%;
-  margin-bottom: 8%;
+  margin-bottom: 4%;
 }
 
 .inputMemo textarea {
@@ -96,6 +96,7 @@
 .submitBtn {
   font-size: 30px;
   font-weight: bold;
+  color: #000;
 
   border: solid 5px black;
   border-radius: 15px;
