@@ -1,22 +1,3 @@
-.headerArea {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 20px;
-}
-
-.homeSpend {
-  background-color: #ffc3bb;
-  width: 100%;
-  height: 100svh;
-}
-.homeIncome {
-  background-color: #fcd894;
-  width: 100%;
-  height: 100svh;
-}
-
 #calendar {
   position: relative;
 }

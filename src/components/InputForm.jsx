@@ -1,7 +1,16 @@
+/* eslint-disable react/prop-types */
+// import { useState } from 'react';
+
 import './InputForm.css';
 
 // eslint-disable-next-line react/prop-types
-export default function InputForm({ onSwitchMode, sortMoney, btnDisabled }) {
+export default function InputForm({
+  // eslint-disable-next-line react/prop-types
+  onSwitchMode,
+  sortMoney,
+  btnDisabled,
+  onAddItem,
+}) {
   return (
     <>
       <div className="switchInput">
@@ -20,7 +29,7 @@ export default function InputForm({ onSwitchMode, sortMoney, btnDisabled }) {
           収入
         </button>
       </div>
-      <div className="inputArea">
+      <form className="inputArea">
         <div className="inputbox">
           <label>項目</label>
           <input
@@ -33,11 +42,15 @@ export default function InputForm({ onSwitchMode, sortMoney, btnDisabled }) {
           <input type="number" placeholder={sortMoney ? '12000' : '1290'} />
         </div>
         <div className="inputMemo">
-          {/* <input type="text" placeholder="メモはここに入力" /> */}
           <textarea placeholder="メモはここに記入" />
         </div>
-        <input type="submit" value="記入" className="submitBtn" />
-      </div>
+        <input
+          type="submit"
+          value="記入"
+          className="submitBtn"
+          onClick={onAddItem}
+        />
+      </form>
     </>
   );
 }

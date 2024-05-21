@@ -1,0 +1,53 @@
+.receiveContainer {
+  margin: 0 24px;
+
+  border: solid 5px #000;
+  background-color: #fff;
+  border-radius: 8px;
+
+  padding: 16px;
+
+  height: 70%;
+}
+.receiveContainer h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 16px 0;
+}
+
+.receiveList {
+  position: relative;
+  counter-increment: list;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding-left: 5%;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+.receiveList span::before {
+  content: '￥';
+  position: absolute;
+  right: 30%;
+}
+
+.receiveList::before {
+  content: counter(list) '. '; /* 显示计数器 */
+  position: absolute;
+  left: 0; /* 数字位置 */
+
+  font-size: 20px;
+}
+
+.receiveDescription {
+  display: block;
+
+  font-size: 16px;
+  margin: 8px 0;
+
+  border-bottom: solid 5px #000;
+
+  width: 100%;
+}

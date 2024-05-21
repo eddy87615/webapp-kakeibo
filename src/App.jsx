@@ -1,13 +1,13 @@
-import './App.css';
-import './components/InputForm.css';
-
-import HeaderBtn from './components/HeaderBtn';
-import CalendarBtn from './components/CalendarBtn';
-import InputForm from './components/InputForm';
-
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Receive from './components/Receive';
+import CalendarPage from './components/CalendarPage';
+import Home from './components/Home';
+
+import './App.css';
 
 export default function App() {
+  // const [items, setItems] = useState([]);
   const [sortMoney, setSortMoney] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const handleSwitch = () => {
@@ -15,18 +15,28 @@ export default function App() {
     setBtnDisabled(!btnDisabled);
   };
 
+  const [items, setItems] = useState([]);
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+
   return (
-    <div className={`${sortMoney ? 'homeIncome' : 'homeSpend'}`}>
-      <div className="headerArea">
-        <HeaderBtn link="/Receive" linkName="今日の明細" />
-        <CalendarBtn />
-        <HeaderBtn link="/CalendarPage" linkName="カレンダー" id="calendar" />
-      </div>
-      <InputForm
-        onSwitchMode={handleSwitch}
-        sortMoney={sortMoney}
-        btnDisabled={btnDisabled}
-      />
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              sortMoney={sortMoney}
+              onSwitchMode={handleSwitch}
+              btnDisabled={btnDisabled}
+              onAddItem={handleAddItems}
+            />
+          }
+        />
+        <Route path="/Receive" element={<Receive />} items={items} />
+        <Route path="/CalendarPage" element={<CalendarPage />} />
+      </Routes>
+    </Router>
   );
 }
