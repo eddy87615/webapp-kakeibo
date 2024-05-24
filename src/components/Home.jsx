@@ -1,18 +1,19 @@
-/* eslint-disable react/prop-types */
+import { useAppContext } from '../AppContext';
 import './Home.css';
 import HeaderBtn from './HeaderBtn';
 import CalendarBtn from './CalendarBtn';
 import InputForm from './InputForm';
 
 // eslint-disable-next-line react/prop-types
-export default function Home({
-  sortMoney,
-  onSwitchMode,
-  btnDisabled,
-  onAddItem,
-  items,
-  setItems,
-}) {
+export default function Home() {
+  const {
+    sortMoney,
+    handleSwitch,
+    btnDisabled,
+    handleAddItems,
+    items,
+    setItems,
+  } = useAppContext();
   console.log('setItems in Home component:', setItems);
   return (
     <div className={`${sortMoney ? 'homeIncome' : 'homeSpend'}`}>
@@ -22,10 +23,10 @@ export default function Home({
         <HeaderBtn link="/calendarPage" linkName="カレンダー" id="calendar" />
       </div>
       <InputForm
-        onSwitchMode={onSwitchMode}
+        onSwitchMode={handleSwitch}
         sortMoney={sortMoney}
         btnDisabled={btnDisabled}
-        handleAddItems={onAddItem}
+        handleAddItems={handleAddItems}
       />
     </div>
   );

@@ -1,7 +1,8 @@
-/* eslint-disable react/prop-types */
+import { useAppContext } from '../AppContext';
 import './ReceiveContainer.css';
 
-export default function ReceiveContainer({ items = [] }) {
+export default function ReceiveContainer() {
+  const { items, handleDeleteItems } = useAppContext();
   console.log('Received items:', items);
   return (
     <>
@@ -10,8 +11,16 @@ export default function ReceiveContainer({ items = [] }) {
         {items.map((entry, index) => (
           <div key={index}>
             <li className="receiveList">
-              {entry.itemName}
-              <span>{entry.price}</span>
+              <span className="listName">{entry.itemName}</span>
+              <span className="listPrice">{entry.price}</span>
+              <button
+                className="deleteBtn"
+                onClick={() => {
+                  handleDeleteItems(index);
+                }}
+              >
+                削除
+              </button>
             </li>
             <span
               className={`${entry.memo === '' ? '' : 'receiveDescription'}`}

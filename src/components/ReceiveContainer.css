@@ -31,15 +31,19 @@
 .receiveList span::before {
   content: '￥';
   position: absolute;
-  right: 30%;
+  left: 45%;
 }
 
 .receiveList::before {
-  content: counter(list) '. '; /* 显示计数器 */
+  content: '';
   position: absolute;
-  left: 0; /* 数字位置 */
-
-  font-size: 20px;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #000;
 }
 
 .receiveDescription {
@@ -52,5 +56,26 @@
 
   width: 100%;
 
+  word-break: break-all;
+}
+
+.deleteBtn {
+  background-color: #fff;
+
+  border: solid 3px #000;
+  border-radius: 8px;
+
+  font-weight: bold;
+
+  height: 30px;
+}
+
+.listName {
+  width: 40%;
+
+  word-break: break-all;
+}
+.listPrice {
+  width: 30%;
   word-break: break-all;
 }

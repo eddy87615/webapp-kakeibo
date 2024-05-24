@@ -1,16 +1,17 @@
-/* eslint-disable react/prop-types */
+import { useAppContext } from '../AppContext';
 import './Receive.css';
 
 import HeaderBtn from './HeaderBtn';
 import CalendarBtn from './CalendarBtn';
 import ReceiveContainer from './ReceiveContainer';
 
-export default function Receive({ items, setItems, handleAddItems }) {
+export default function Receive() {
+  const { items, handleAddItems } = useAppContext();
   return (
     <div className="receiveHome">
       <div className="headerArea">
         <HeaderBtn link="/" linkName="TOP" />
-        <CalendarBtn items={items} setItems={setItems} />
+        <CalendarBtn />
         <HeaderBtn link="/CalendarPage" linkName="カレンダー" id="calendar" />
       </div>
       <ReceiveContainer items={items} handleAddItems={handleAddItems} />
