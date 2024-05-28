@@ -3,10 +3,10 @@
   "short_name": "SIMPLE KAKEIBO",
   "theme_color": "#61dafbaa",
   "background_color": "#61dafbaa",
-  "display": "browser",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/index.html",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",

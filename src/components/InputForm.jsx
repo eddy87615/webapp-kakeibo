@@ -33,6 +33,7 @@ export default function InputForm() {
   }, [itemName, price, memo]);
 
   const handleSubmit = (e) => {
+    if (itemName === '' || price === '') return;
     e.preventDefault();
     const newItem = {
       itemName,

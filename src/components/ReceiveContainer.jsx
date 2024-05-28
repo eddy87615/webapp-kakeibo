@@ -29,6 +29,18 @@ export default function ReceiveContainer() {
             </span>
           </div>
         ))}
+        <div className="totalPriceArea">
+          <p className="totalPriceAreaTotal">
+            合計：<span>123</span>
+          </p>
+          <span className="line" />
+          <p className="totalPriceAreaTotalExpense">
+            合計支出：<span>123</span>
+          </p>
+          <p className="totalPriceAreaTotalIncome">
+            合計収入：<span>123</span>
+          </p>
+        </div>
       </ol>
     </>
   );
