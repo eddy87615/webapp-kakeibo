@@ -9,6 +9,7 @@ export default function InputForm() {
   const [itemName, setItemName] = useState('');
   const [price, setPrice] = useState('');
   const [memo, setMemo] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const storedItemName = localStorage.getItem('itemName');
@@ -37,7 +38,9 @@ export default function InputForm() {
     e.preventDefault();
     const newItem = {
       itemName,
-      price,
+      price: sortMoney
+        ? Math.abs(parseFloat(price))
+        : -Math.abs(parseFloat(price)),
       memo,
       type: sortMoney ? 'income' : 'expense',
     };
@@ -48,6 +51,8 @@ export default function InputForm() {
     localStorage.removeItem('itemName');
     localStorage.removeItem('price');
     localStorage.removeItem('memo');
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 1000);
   };
 
   return (
@@ -96,6 +101,8 @@ export default function InputForm() {
         </div>
         <input type="submit" value="記入" className="submitBtn" />
       </form>
+
+      {showAlert && <div className="doneAlert">記入しました！</div>}
     </>
   );
 }

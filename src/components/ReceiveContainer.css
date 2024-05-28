@@ -5,11 +5,11 @@
 
   border: solid 5px #000;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 15px;
 
   padding: 16px;
 
-  height: 70%;
+  height: 64%;
 
   overflow: scroll;
 }
@@ -108,4 +108,43 @@
   width: 100%;
   height: 5px;
   background-color: #000;
+}
+
+.receiveBtnArea {
+  position: absolute;
+  left: 50%;
+  bottom: 3%;
+  transform: translate(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4%;
+
+  margin-top: 4%;
+}
+
+.receiveBtnArea button {
+  width: 100px;
+  height: 60px;
+
+  border: solid 5px #000;
+  border-radius: 15px;
+
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+
+  box-shadow: 4px 4px 0 0 black;
+}
+
+.receiveBtnArea button:nth-child(1) {
+  background-color: #ff8888;
+}
+.receiveBtnArea button:nth-child(2) {
+  background-color: #8bee89;
+}
+.receiveBtnArea button:nth-child(3) {
+  background-color: #93dfff;
 }

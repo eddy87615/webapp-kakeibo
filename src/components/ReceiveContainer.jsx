@@ -42,6 +42,11 @@ export default function ReceiveContainer() {
           </p>
         </div>
       </ol>
+      <div className="receiveBtnArea">
+        <button>削除</button>
+        <button>保存</button>
+        <button>シェア</button>
+      </div>
     </>
   );
 }

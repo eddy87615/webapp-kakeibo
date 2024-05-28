@@ -11,6 +11,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   font-size: 12px;
+
+  color: #000;
 }
 
 body,
@@ -25,6 +27,4 @@ html {
   min-height: 100vh;
   width: 100%;
   height: 100svh;
-
-  color: #000;
 }

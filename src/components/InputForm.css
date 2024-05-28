@@ -113,3 +113,22 @@
   transform: translate(4px, 4px);
   transition: 0.3s;
 }
+
+.doneAlert {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translate(-50%);
+
+  background-color: #fff;
+
+  border-radius: 15px;
+
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+
+  width: 50%;
+
+  padding: 1rem;
+}

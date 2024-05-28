@@ -16,3 +16,33 @@
   width: 100%;
   height: 100svh;
 }
+
+#calendar {
+  position: relative;
+}
+#calendar::after {
+  content: '';
+  position: absolute;
+
+  width: 5px;
+  height: 20px;
+
+  top: -20%;
+  left: 20%;
+
+  background-color: black;
+  border-radius: 20px;
+}
+#calendar::before {
+  content: '';
+  position: absolute;
+
+  width: 5px;
+  height: 20px;
+
+  top: -20%;
+  right: 20%;
+
+  background-color: black;
+  border-radius: 20px;
+}

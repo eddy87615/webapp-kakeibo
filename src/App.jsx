@@ -5,8 +5,6 @@ import CalendarPage from './components/CalendarPage';
 import Home from './components/Home';
 import ReceiveContainer from './components/ReceiveContainer';
 
-import './App.css';
-
 export default function App() {
   return (
     <AppProvider>
