@@ -27,22 +27,34 @@ export const AppProvider = ({ children }) => {
   };
 
   const handleAddItems = (item) => {
-    const newItems = [...items, item];
+    const dateKey = currentDate.toDateString();
+    const newItems = { ...items, [dateKey]: [...(items[dateKey] || []), item] };
     setItems(newItems);
     localStorage.setItem('items', JSON.stringify(newItems));
   };
 
   const handleDeleteItems = (index) => {
-    const newItems = items.filter((_, i) => i !== index);
+    // eslint-disable-next-line no-unused-vars
+    const dateKey = currentDate.toDateString();
+    const newItems = {
+      ...items,
+      [dateKey]: items[dateKey].filter((_, i) => i !== index),
+    };
     setItems(newItems);
     localStorage.setItem('items', JSON.stringify(newItems));
   };
 
-  // 更新 localStorage 中的 sortMoney 和 btnDisabled
   useEffect(() => {
     localStorage.setItem('sortMoney', JSON.stringify(sortMoney));
     localStorage.setItem('btnDisabled', JSON.stringify(btnDisabled));
   }, [sortMoney, btnDisabled]);
+
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const changeDate = (days) => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() + days);
+    setCurrentDate(newDate);
+  };
 
   return (
     <AppContext.Provider
@@ -52,7 +64,9 @@ export const AppProvider = ({ children }) => {
         btnDisabled,
         handleAddItems,
         handleDeleteItems,
-        items,
+        items: items[currentDate.toDateString()] || [],
+        changeDate,
+        currentDate,
       }}
     >
       {children}

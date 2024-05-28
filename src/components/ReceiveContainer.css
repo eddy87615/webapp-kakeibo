@@ -35,7 +35,7 @@
 .receiveList span::before {
   content: '￥';
   position: absolute;
-  left: 45%;
+  left: 48%;
 }
 
 .receiveList::before {
@@ -80,7 +80,7 @@
   word-break: break-all;
 }
 .listPrice {
-  width: 30%;
+  width: 20%;
   word-break: break-all;
 }
 

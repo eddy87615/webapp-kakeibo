@@ -2,8 +2,18 @@ import { useAppContext } from '../AppContext';
 import './ReceiveContainer.css';
 
 export default function ReceiveContainer() {
-  const { items, handleDeleteItems } = useAppContext();
+  const { items, handleDeleteItems, currentDate } = useAppContext();
   console.log('Received items:', items);
+
+  const totalIncome = items.reduce(
+    (sum, item) => (item.type === 'income' ? sum + item.price : sum),
+    0
+  );
+  const totalExpense = items.reduce(
+    (sum, item) => (item.type === 'expense' ? sum + item.price : sum),
+    0
+  );
+
   return (
     <>
       <ol className="receiveContainer">
@@ -31,14 +41,14 @@ export default function ReceiveContainer() {
         ))}
         <div className="totalPriceArea">
           <p className="totalPriceAreaTotal">
-            合計：<span>123</span>
+            合計：<span>{totalIncome + totalExpense}</span>
           </p>
           <span className="line" />
           <p className="totalPriceAreaTotalExpense">
-            合計支出：<span>123</span>
+            合計支出：<span>{totalExpense}</span>
           </p>
           <p className="totalPriceAreaTotalIncome">
-            合計収入：<span>123</span>
+            合計収入：<span>{totalIncome}</span>
           </p>
         </div>
       </ol>
