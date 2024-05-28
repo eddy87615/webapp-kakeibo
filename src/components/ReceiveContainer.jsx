@@ -2,7 +2,7 @@ import { useAppContext } from '../AppContext';
 import './ReceiveContainer.css';
 
 export default function ReceiveContainer() {
-  const { items, handleDeleteItems, currentDate } = useAppContext();
+  const { items, handleDeleteItems } = useAppContext();
   console.log('Received items:', items);
 
   const totalIncome = items.reduce(
