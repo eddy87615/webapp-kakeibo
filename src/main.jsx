@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { useEffect } from 'react';
 
 //service worker register
 const registerServiceWorker = async () => {
   if ('serviceworker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register(
+      const registration = await navigator.serviceworker.register(
         '/serviceworker.js',
         {
-          scope: './main.jsx',
+          scope: '/',
         }
       );
       if (registration.installing) {
@@ -26,17 +27,6 @@ const registerServiceWorker = async () => {
   }
 };
 
-navigator.serviceWorker.register('/serviceworker.js').then(
-  (registration) => {
-    console.log(
-      'ServiceWorker registration successful with scope: ',
-      registration.scope
-    );
-  },
-  (err) => {
-    console.log('ServiceWorker registration failed: ', err);
-  }
-);
 registerServiceWorker();
 
 let deferredPrompt;
@@ -60,8 +50,50 @@ window.addEventListener('beforeinstallprompt', (e) => {
   });
 });
 
+const InstallPromptButton = () => {
+  useEffect(() => {
+    let deferredPrompt;
+
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      const installButton = document.getElementById('installButton');
+      if (installButton) {
+        installButton.style.display = 'block';
+        installButton.addEventListener('click', async () => {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          deferredPrompt = null;
+        });
+      }
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handleBeforeInstallPrompt
+      );
+    };
+  }, []);
+
+  return (
+    <button id="installButton" style={{ display: 'none' }}>
+      Install App
+    </button>
+  );
+};
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
+    <InstallPromptButton />
   </React.StrictMode>
 );
