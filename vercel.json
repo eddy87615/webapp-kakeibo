@@ -1,5 +1,17 @@
 {
   "rewrites": [
     { "source": "/serviceworker.js", "destination": "/public/serviceworker.js" }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
   ]
 }
