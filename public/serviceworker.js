@@ -12,22 +12,46 @@ const urlsToCache = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Opened cache');
-      return cache.addAll(urlsToCache).catch((error) => {
-        console.error('Failed to add resources to cache:', error);
-        urlsToCache.forEach(async (url) => {
-          try {
-            const response = await fetch(url);
-            if (!response.ok) {
-              console.error(`Failed to fetch ${url}: ${response.statusText}`);
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache).catch((error) => {
+          console.error('Failed to add resources to cache:', error);
+          urlsToCache.forEach(async (url) => {
+            try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                console.error(`Failed to fetch ${url}: ${response.statusText}`);
+              }
+            } catch (fetchError) {
+              console.error(`Failed to fetch ${url}: ${fetchError.message}`);
             }
-          } catch (fetchError) {
-            console.error(`Failed to fetch ${url}: ${fetchError.message}`);
-          }
+          });
         });
-      });
-    })
+      })
+      .then(() => {
+        self.skipWaiting(); // 强制等待中的 Service Worker 进入激活状态
+      })
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME) {
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => {
+        return self.clients.claim(); // 让这个激活后的 Service Worker 立即控制页面
+      })
   );
 });
 

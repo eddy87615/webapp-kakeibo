@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-console.log('main.jsx loaded'); // 调试信息
-
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
@@ -37,6 +35,7 @@ const InstallPrompt = () => {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
+      console.log('beforeinstallprompt event fired'); // 调试信息
       e.preventDefault();
       setDeferredPrompt(e);
       setShowButton(true);
