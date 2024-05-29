@@ -3,25 +3,11 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/src/main.jsx',
+  '/src/AppContext.jsx',
   '/src/index.css',
   '/src/App.jsx',
-  '/src/App.css',
-  '/src/components/CalendarBtn.jsx',
-  '/src/components/CalendarBtn.css',
-  '/src/components/CalendarPage.jsx',
-  '/src/components/Header.css',
-  '/src/components/HeaderBtn.jsx',
-  '/src/components/Home.css',
-  '/src/components/Home.jsx',
-  '/src/components/InputForm.css',
-  '/src/components/InputForm.jsx',
-  '/src/components/Receive.css',
-  '/src/components/Receive.jsx',
-  '/src/components/ReceiveContainer.css',
-  '/src/components/ReceiveContainer.jsx',
-  '/src/AppContext.jsx',
-  '/o0350035012647143728.webp',
   '/manifest.json',
+  '/o0350035012647143728.webp',
 ];
 
 self.addEventListener('install', (event) => {
@@ -30,6 +16,16 @@ self.addEventListener('install', (event) => {
       console.log('Opened cache');
       return cache.addAll(urlsToCache).catch((error) => {
         console.error('Failed to add resources to cache:', error);
+        urlsToCache.forEach(async (url) => {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              console.error(`Failed to fetch ${url}: ${response.statusText}`);
+            }
+          } catch (fetchError) {
+            console.error(`Failed to fetch ${url}: ${fetchError.message}`);
+          }
+        });
       });
     })
   );
