@@ -27,28 +27,19 @@ const registerServiceWorker = async () => {
 
 registerServiceWorker();
 
-const InstallPromptButton = () => {
+const InstallPrompt = () => {
   useEffect(() => {
-    let deferredPrompt;
-
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
-      deferredPrompt = e;
+      e.prompt(); // 立即触发安装提示
 
-      const installButton = document.getElementById('installButton');
-      if (installButton) {
-        installButton.style.display = 'block';
-        installButton.addEventListener('click', async () => {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-          deferredPrompt = null;
-        });
-      }
+      e.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+      });
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -61,16 +52,12 @@ const InstallPromptButton = () => {
     };
   }, []);
 
-  return (
-    <button id="installButton" style={{ display: 'none' }}>
-      Install App
-    </button>
-  );
+  return null; // 不需要按钮，直接在组件中处理
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-    <InstallPromptButton />
+    <InstallPrompt />
   </React.StrictMode>
 );
