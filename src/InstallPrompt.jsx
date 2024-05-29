@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
 const InstallPrompt = () => {
-  const [showButton, setShowButton] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
@@ -15,18 +15,17 @@ const InstallPrompt = () => {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     console.log('Event listener added for beforeinstallprompt');
 
-    // 延迟三秒后显示下载按钮
-    const timer = setTimeout(() => {
-      setShowButton(true);
-    }, 3000);
+    // 模拟用户交互
+    setTimeout(() => {
+      const event = new Event('click');
+      document.body.dispatchEvent(event);
+    }, 1000);
 
     return () => {
       window.removeEventListener(
         'beforeinstallprompt',
         handleBeforeInstallPrompt
       );
-      clearTimeout(timer);
-      console.log('Event listener removed for beforeinstallprompt');
     };
   }, []);
 
@@ -37,11 +36,10 @@ const InstallPrompt = () => {
       const { outcome } = await deferredPrompt.userChoice;
       console.log(`User response to the install prompt: ${outcome}`);
       setDeferredPrompt(null);
-      setShowButton(false);
+      setShowButton(false); // 隐藏按钮以避免重复点击
     } else {
-      // 手动触发安装提示
       alert(
-        'To install the app, please use the browser\'s install option (e.g., "Add to Home screen" in Chrome menu).'
+        'To install the app, please use the browser\'s install option (e.g., "Add to Home screen" in the Chrome menu).'
       );
     }
   };

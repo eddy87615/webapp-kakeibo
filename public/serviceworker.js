@@ -4,7 +4,7 @@ const urlsToCache = [
   'index.html',
   'ssets/manifest-qKehwvoP.json',
   '0350035012647143728.webp',
-  'ssets/index-B_fknhGM.css',
+  'assets/index-B_fknhGM.css',
   'assets/index-BtPnsk0a.js',
 ];
 
