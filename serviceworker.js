@@ -34,6 +34,14 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // 过滤掉不支持的协议请求
+  if (
+    event.request.url.startsWith('chrome-extension://') ||
+    event.request.url.startsWith('chrome://')
+  ) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {

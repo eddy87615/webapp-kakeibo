@@ -59,7 +59,6 @@ const InstallPrompt = () => {
 
   return <button onClick={handleInstallClick}>Install App</button>;
 };
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
