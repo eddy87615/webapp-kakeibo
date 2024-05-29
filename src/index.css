@@ -12,7 +12,7 @@
 
   font-size: 12px;
 
-  color: #000;
+  --text-color: black;
 }
 
 body,
@@ -29,4 +29,11 @@ html {
   height: 100svh;
 
   color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 覆蓋黑暗模式的設置，仍然使用亮色模式 */
+    --text-color: black;
+  }
 }

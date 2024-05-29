@@ -39,6 +39,27 @@ navigator.serviceWorker.register('/serviceworker.js').then(
 );
 registerServiceWorker();
 
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // 防止自動顯示安裝提示
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // 在你認為合適的時候顯示提示
+  document.getElementById('installButton').addEventListener('click', (e) => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+    });
+  });
+});
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
