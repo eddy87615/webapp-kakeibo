@@ -1,12 +1,29 @@
 const CACHE_NAME = 'my-cache-v1';
 const urlsToCache = [
+  '/',
   '/index.html',
   '/src/main.jsx',
   '/src/index.css',
   '/src/App.jsx',
+  '/src/App.css',
+  '/src/components/CalendarBtn.jsx',
+  '/src/components/CalendarBtn.css',
+  '/src/components/CalendarPage.jsx',
+  '/src/components/Header.css',
+  '/src/components/HeaderBtn.jsx',
+  '/src/components/Home.css',
+  '/src/components/Home.jsx',
+  '/src/components/InputForm.css',
+  '/src/components/InputForm.jsx',
+  '/src/components/Receive.css',
+  '/src/components/Receive.jsx',
+  '/src/components/ReceiveContainer.css',
+  '/src/components/ReceiveContainer.jsx',
+  '/src/AppContext.jsx',
+  '/public/o0350035012647143728.webp',
+  '/manifest.json',
 ];
 
-// 安裝階段 - 緩存資源
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -16,30 +33,34 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// 激活階段 - 清理舊緩存
-self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
-
-// 攔截網絡請求 - 提供緩存資源
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
         return response;
       }
-      return fetch(event.request);
+
+      return fetch(event.request)
+        .then((networkResponse) => {
+          if (
+            !networkResponse ||
+            networkResponse.status !== 200 ||
+            networkResponse.type !== 'basic'
+          ) {
+            return networkResponse;
+          }
+
+          const responseToCache = networkResponse.clone();
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match('/index.html');
+        });
     })
   );
 });

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-// Service worker register
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
@@ -14,9 +14,9 @@ const registerServiceWorker = async () => {
         }
       );
       if (registration.installing) {
-        console.log('正在安装 Service worker');
+        console.log('正在安裝 Service worker');
       } else if (registration.waiting) {
-        console.log('已安装 Service worker');
+        console.log('已安裝 Service worker');
       } else if (registration.active) {
         console.log('啟動 Service worker');
       }
@@ -29,12 +29,12 @@ const registerServiceWorker = async () => {
 registerServiceWorker();
 
 const InstallPrompt = () => {
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
-      setDeferredPrompt(e);
+      // 使用用戶手勢觸發 prompt
+      window.deferredPrompt = e;
+      console.log('beforeinstallprompt Event fired');
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -48,27 +48,16 @@ const InstallPrompt = () => {
   }, []);
 
   const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-      setDeferredPrompt(null);
+    const promptEvent = window.deferredPrompt;
+    if (promptEvent) {
+      promptEvent.prompt();
+      const { outcome } = await promptEvent.userChoice;
+      console.log(`User response to the install prompt: ${outcome}`);
+      window.deferredPrompt = null;
     }
   };
 
-  return (
-    <button
-      id="installButton"
-      onClick={handleInstallClick}
-      style={{ display: deferredPrompt ? 'block' : 'none' }}
-    >
-      Install App
-    </button>
-  );
+  return <button onClick={handleInstallClick}>Install App</button>;
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
