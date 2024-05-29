@@ -4,7 +4,6 @@ const urlsToCache = [
   '/src/main.jsx',
   '/src/index.css',
   '/src/App.jsx',
-  '/src/App.css',
 ];
 
 // 安裝階段 - 緩存資源
