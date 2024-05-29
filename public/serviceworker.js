@@ -1,11 +1,11 @@
 const CACHE_NAME = 'my-cache-v1';
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/manifest.json',
-  '/o0350035012647143728.webp',
-  '/assets/index-B_fknhGM.css',
-  '/assets/index-CuYRgngG.js',
+  '/dist/index.html',
+  '/dist/assets/manifest-qKehwvoP.json',
+  '/dist/o0350035012647143728.webp',
+  '/dist/assets/index-B_fknhGM.css',
+  '/dist/assets/index-BtPnsk0a.js',
 ];
 
 self.addEventListener('install', (event) => {
@@ -86,7 +86,7 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          return caches.match('/index.html');
+          return caches.match('/dist/index.html');
         });
     })
   );
