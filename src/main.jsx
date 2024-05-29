@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
+// Service worker register
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
