@@ -8,6 +8,7 @@ export default defineConfig({
     hmr: {
       protocol: 'ws',
       host: 'localhost',
+      port: 5173, // 确保 HMR 使用的端口和服务器端口一致
     },
   },
 });

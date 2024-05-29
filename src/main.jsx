@@ -33,9 +33,10 @@ const InstallPrompt = () => {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
+      console.log('beforeinstallprompt event fired');
       e.preventDefault();
-      setDeferredPrompt(e); // 保存事件以便稍后使用
-      setShowButton(true); // 当事件触发时显示按钮
+      setDeferredPrompt(e);
+      setShowButton(true);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -54,16 +55,19 @@ const InstallPrompt = () => {
       const { outcome } = await deferredPrompt.userChoice;
       console.log(`User response to the install prompt: ${outcome}`);
       setDeferredPrompt(null);
-      setShowButton(false); // 用户做出选择后隐藏按钮
+      setShowButton(false);
     }
   };
 
   return (
     <>
       {showButton && <button onClick={handleInstallClick}>Install App</button>}
+      {!showButton && <p>Install prompt not available</p>}
     </>
   );
 };
+
+export default InstallPrompt;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
