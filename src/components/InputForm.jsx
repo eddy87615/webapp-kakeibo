@@ -15,11 +15,11 @@ export default function InputForm() {
     const storedItemName = localStorage.getItem('itemName');
     const storedPrice = localStorage.getItem('price');
     const storedMemo = localStorage.getItem('memo');
-    console.log('Loaded from localStorage:', {
-      storedItemName,
-      storedPrice,
-      storedMemo,
-    });
+    // console.log('Loaded from localStorage:', {
+    //   storedItemName,
+    //   storedPrice,
+    //   storedMemo,
+    // });
     if (storedItemName) setItemName(storedItemName);
     if (storedPrice) setPrice(storedPrice);
     if (storedMemo) setMemo(storedMemo);
@@ -30,7 +30,7 @@ export default function InputForm() {
     localStorage.setItem('itemName', itemName);
     localStorage.setItem('price', price);
     localStorage.setItem('memo', memo);
-    console.log('Saved to localStorage:', { itemName, price, memo });
+    // console.log('Saved to localStorage:', { itemName, price, memo });
   }, [itemName, price, memo]);
 
   const handleSubmit = (e) => {

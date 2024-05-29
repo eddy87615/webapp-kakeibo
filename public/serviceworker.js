@@ -1,11 +1,11 @@
 const CACHE_NAME = 'my-cache-v1';
 const urlsToCache = [
   '/',
-  '/assets/index.html',
-  '/assets/manifest.json',
-  '/assets/o0350035012647143728.webp',
-  '/assets/index-B_fknhGM.css',
-  '/assets/index-BXlj_1Db.js',
+  '/dist/index.html',
+  '/dist/manifest.json',
+  '/dist/o0350035012647143728.webp',
+  '/dist/assets/index-B_fknhGM.css',
+  '/dist/assets/index-BXlj_1Db.js',
 ];
 
 self.addEventListener('install', (event) => {

@@ -35,8 +35,8 @@ const InstallPrompt = () => {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
-      console.log('beforeinstallprompt event fired'); // 调试信息
-      e.preventDefault();
+      console.log('beforeinstallprompt event fired', e); // 调试信息
+      e.preventDefault(); // 阻止默认事件，允许你稍后触发
       setDeferredPrompt(e);
       setShowButton(true);
     };
@@ -50,6 +50,10 @@ const InstallPrompt = () => {
       );
     };
   }, []);
+
+  if (!showButton) {
+    console.log('Install button not available'); // 如果按钮不可用，输出日志
+  }
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {

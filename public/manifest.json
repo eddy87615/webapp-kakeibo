@@ -6,7 +6,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
-  "start_url": "/index.html",
+  "start_url": "/",
   "icons": [
     {
       "src": "/o0350035012647143728.webp",
