@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -29,18 +29,12 @@ const registerServiceWorker = async () => {
 registerServiceWorker();
 
 const InstallPrompt = () => {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
-      e.prompt(); // 立即触发安装提示
-
-      e.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-      });
+      setDeferredPrompt(e);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -53,7 +47,28 @@ const InstallPrompt = () => {
     };
   }, []);
 
-  return null; // 不需要按钮，直接在组件中处理
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      setDeferredPrompt(null);
+    }
+  };
+
+  return (
+    <button
+      id="installButton"
+      onClick={handleInstallClick}
+      style={{ display: deferredPrompt ? 'block' : 'none' }}
+    >
+      Install App
+    </button>
+  );
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
