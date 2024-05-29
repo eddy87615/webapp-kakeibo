@@ -4,48 +4,71 @@
   "theme_color": "#61dafbaa",
   "background_color": "#61dafbaa",
   "display": "standalone",
-  "orientation": "portrait",
-  "scope": "/",
   "start_url": "/",
   "icons": [
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/384.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "/o0350035012647143728.webp",
+      "src": "/512.png",
       "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screen01.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screen02.png",
+      "sizes": "720x1280",
       "type": "image/png"
     }
   ]

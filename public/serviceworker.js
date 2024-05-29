@@ -2,7 +2,7 @@ const CACHE_NAME = 'my-cache-v1';
 const urlsToCache = [
   '/',
   'index.html',
-  'ssets/manifest-qKehwvoP.json',
+  'assets/manifest-qKehwvoP.json',
   '0350035012647143728.webp',
   'assets/index-B_fknhGM.css',
   'assets/index-BtPnsk0a.js',
@@ -29,7 +29,7 @@ self.addEventListener('install', (event) => {
         });
       })
       .then(() => {
-        self.skipWaiting(); // 强制等待中的 Service Worker 进入激活状态
+        self.skipWaiting();
       })
   );
 });
@@ -48,7 +48,7 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => {
-        return self.clients.claim(); // 让这个激活后的 Service Worker 立即控制页面
+        return self.clients.claim();
       })
   );
 });
@@ -86,7 +86,7 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          return caches.match('/dist/index.html');
+          return caches.match('/index.html');
         });
     })
   );

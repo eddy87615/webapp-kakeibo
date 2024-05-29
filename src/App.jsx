@@ -4,6 +4,7 @@ import Receive from './components/Receive';
 import CalendarPage from './components/CalendarPage';
 import Home from './components/Home';
 import ReceiveContainer from './components/ReceiveContainer';
+import InstallPrompt from './InstallPrompt';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/ReceiveContainer" element={<ReceiveContainer />} />
         </Routes>
       </Router>
+      <InstallPrompt />
     </AppProvider>
   );
 }
