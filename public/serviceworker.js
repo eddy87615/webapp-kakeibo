@@ -20,7 +20,7 @@ const urlsToCache = [
   '/src/components/ReceiveContainer.css',
   '/src/components/ReceiveContainer.jsx',
   '/src/AppContext.jsx',
-  '/public/o0350035012647143728.webp',
+  '/o0350035012647143728.webp',
   '/manifest.json',
 ];
 
@@ -28,13 +28,14 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('Opened cache');
-      return cache.addAll(urlsToCache);
+      return cache.addAll(urlsToCache).catch((error) => {
+        console.error('Failed to add resources to cache:', error);
+      });
     })
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  // 过滤掉不支持的协议请求
   if (
     event.request.url.startsWith('chrome-extension://') ||
     event.request.url.startsWith('chrome://')

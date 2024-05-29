@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+// src/main.jsx
+import React from 'react';
+import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+
+console.log('main.jsx loaded'); // 调试信息
 
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
@@ -13,14 +17,14 @@ const registerServiceWorker = async () => {
         }
       );
       if (registration.installing) {
-        console.log('正在安裝 Service worker');
+        console.log('正在安装 Service worker');
       } else if (registration.waiting) {
-        console.log('已安裝 Service worker');
+        console.log('已安装 Service worker');
       } else if (registration.active) {
-        console.log('啟動 Service worker');
+        console.log('已激活 Service worker');
       }
     } catch (error) {
-      console.error(`註冊失敗：${error}`);
+      console.error(`注册失败：${error}`);
     }
   }
 };
@@ -33,7 +37,6 @@ const InstallPrompt = () => {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
-      console.log('beforeinstallprompt event fired');
       e.preventDefault();
       setDeferredPrompt(e);
       setShowButton(true);
@@ -66,8 +69,6 @@ const InstallPrompt = () => {
     </>
   );
 };
-
-export default InstallPrompt;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
