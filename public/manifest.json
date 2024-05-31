@@ -5,6 +5,14 @@
   "background_color": "#61dafbaa",
   "display": "standalone",
   "start_url": "/",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.example.app",
+      "id": "com.example.app"
+    }
+  ],
   "icons": [
     {
       "src": "/72.png",
@@ -62,13 +70,13 @@
   "screenshots": [
     {
       "src": "/screen01.png",
-      "sizes": "720x1280",
+      "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
       "src": "/screen02.png",
-      "sizes": "720x1280",
+      "sizes": "1280x720",
       "type": "image/png"
     }
   ]

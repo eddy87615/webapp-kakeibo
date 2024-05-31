@@ -16,8 +16,8 @@ export default function App() {
           <Route path="/CalendarPage" element={<CalendarPage />} />
           <Route path="/ReceiveContainer" element={<ReceiveContainer />} />
         </Routes>
+        <InstallPrompt />
       </Router>
-      <InstallPrompt />
     </AppProvider>
   );
 }

@@ -25,7 +25,6 @@ const registerServiceWorker = async () => {
     }
   }
 };
-
 registerServiceWorker();
 
 ReactDOM.createRoot(document.getElementById('root')).render(

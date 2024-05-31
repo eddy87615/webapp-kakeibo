@@ -5,17 +5,14 @@ const InstallPrompt = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handler = (e) => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
+      // Stash the event so it can be triggered later.
       setDeferredPrompt(e);
+      // Update UI notify the user they can install the PWA
       setIsVisible(true);
-    };
-
-    window.addEventListener('beforeinstallprompt', handler);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
-    };
+    });
   }, []);
 
   const handleInstallClick = async () => {
@@ -23,23 +20,18 @@ const InstallPrompt = () => {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       console.log(`User response to the install prompt: ${outcome}`);
+      // Reset the deferred prompt variable, since
+      // prompt() can only be called once.
       setDeferredPrompt(null);
       setIsVisible(false);
-    } else {
-      console.log('Deferred prompt not available');
     }
   };
 
-  return (
-    isVisible && (
-      <button
-        onClick={handleInstallClick}
-        style={{ position: 'fixed', bottom: 0, right: 0, margin: '1rem' }}
-      >
-        安裝應用程式
-      </button>
-    )
-  );
+  if (!isVisible) {
+    return null;
+  }
+
+  return <button onClick={handleInstallClick}>安裝 PWA</button>;
 };
 
 export default InstallPrompt;
