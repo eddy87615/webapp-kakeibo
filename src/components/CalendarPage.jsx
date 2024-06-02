@@ -1,12 +1,18 @@
-import Header from './HeaderBtn';
+import HeaderBtn from './HeaderBtn';
+import Calendar from 'react-calendar';
+import './CalendarPage.css';
 
 function CalendarPage() {
   return (
     <>
-      <div className="header">
-        <Header link="/" linkName="TOP" />
+      <div className="headerArea">
+        <HeaderBtn link="/" linkName="TOP" />
+        <h1>カレンダー</h1>
+        <HeaderBtn linkName="今日の明細を削除" id="deleteToday" />
       </div>
-      <h1>CALENDAR</h1>
+      <div>
+        <Calendar />
+      </div>
     </>
   );
 }
