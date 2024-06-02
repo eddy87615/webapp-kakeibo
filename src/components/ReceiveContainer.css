@@ -9,7 +9,7 @@
 
   padding: 16px;
 
-  height: 64%;
+  height: 70%;
 
   overflow: scroll;
 }
@@ -113,7 +113,7 @@
 .receiveBtnArea {
   position: absolute;
   left: 50%;
-  bottom: 16px;
+  bottom: 4%;
   transform: translate(-50%);
 
   display: flex;
