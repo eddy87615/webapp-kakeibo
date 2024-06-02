@@ -1,25 +1,32 @@
-// eslint-disable-next-line no-unused-vars
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 // 建立 Context
 const AppContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const AppProvider = ({ children }) => {
-  const [sortMoney, setSortMoney] = useState(() => {
+  const [sortMoney, setSortMoney] = useState(false);
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [items, setItems] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  // 在 useEffect 中读取 localStorage
+  useEffect(() => {
     const storedSortMoney = localStorage.getItem('sortMoney');
-    return storedSortMoney ? JSON.parse(storedSortMoney) : false;
-  });
+    if (storedSortMoney) {
+      setSortMoney(JSON.parse(storedSortMoney));
+    }
 
-  const [btnDisabled, setBtnDisabled] = useState(() => {
     const storedBtnDisabled = localStorage.getItem('btnDisabled');
-    return storedBtnDisabled ? JSON.parse(storedBtnDisabled) : true;
-  });
+    if (storedBtnDisabled) {
+      setBtnDisabled(JSON.parse(storedBtnDisabled));
+    }
 
-  const [items, setItems] = useState(() => {
     const storedItems = localStorage.getItem('items');
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
+    if (storedItems) {
+      setItems(JSON.parse(storedItems));
+    }
+  }, []);
 
   const handleSwitch = () => {
     setSortMoney(!sortMoney);
@@ -34,7 +41,6 @@ export const AppProvider = ({ children }) => {
   };
 
   const handleDeleteItems = (index) => {
-    // eslint-disable-next-line no-unused-vars
     const dateKey = currentDate.toDateString();
     const newItems = {
       ...items,
@@ -49,7 +55,6 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem('btnDisabled', JSON.stringify(btnDisabled));
   }, [sortMoney, btnDisabled]);
 
-  const [currentDate, setCurrentDate] = useState(new Date());
   const changeDate = (days) => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() + days);

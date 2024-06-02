@@ -18,9 +18,9 @@ export default function Home() {
   return (
     <div className={`${sortMoney ? 'homeIncome' : 'homeSpend'}`}>
       <div className="headerArea">
-        <HeaderBtn link="/receive" linkName="今日の明細" />
+        <HeaderBtn link="/Receive" linkName="今日の明細" />
         <CalendarBtn items={items} setItems={setItems} />
-        <HeaderBtn link="/calendarPage" linkName="カレンダー" id="calendar" />
+        <HeaderBtn link="/CalendarPage" linkName="カレンダー" id="calendar" />
       </div>
       <InputForm
         onSwitchMode={handleSwitch}
