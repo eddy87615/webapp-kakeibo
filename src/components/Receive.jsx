@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useAppContext } from '../AppContext';
 import './Receive.css';
 
@@ -7,6 +8,10 @@ import ReceiveContainer from './ReceiveContainer';
 
 export default function Receive() {
   const { items, handleAddItems } = useAppContext();
+  useEffect(() => {
+    document.getElementById('theme-color').setAttribute('content', '#fff4e3');
+    document.body.style.backgroundColor = '#fff4e3';
+  }, []);
   return (
     <div className="receiveHome">
       <div className="headerArea">
