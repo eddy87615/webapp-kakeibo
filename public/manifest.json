@@ -1,8 +1,8 @@
 {
   "name": "簡単家計簿",
   "short_name": "SIMPLE KAKEIBO",
-  "theme_color": "#61dafbaa",
-  "background_color": "#61dafbaa",
+  "theme_color": "#ffc3bb",
+  "background_color": "#ffc3bb",
   "display": "standalone",
   "start_url": "/",
   "prefer_related_applications": true,

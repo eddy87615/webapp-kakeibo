@@ -3,6 +3,11 @@ import { useAppContext } from '../AppContext';
 import './InputForm.css';
 
 export default function InputForm() {
+  useEffect(() => {
+    const themeColor = sortMoney ? '#fcd894' : '#ffc3bb';
+    document.getElementById('theme-color').setAttribute('content', themeColor);
+  }, [sortMoney]);
+
   const { sortMoney, handleSwitch, btnDisabled, handleAddItems } =
     useAppContext();
 
