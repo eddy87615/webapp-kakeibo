@@ -1,5 +1,5 @@
 import HeaderBtn from './HeaderBtn';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 import './CalendarPage.css';
 
 function CalendarPage() {
@@ -10,9 +10,7 @@ function CalendarPage() {
         <h1>カレンダー</h1>
         <HeaderBtn linkName="今日の明細を削除" id="deleteToday" />
       </div>
-      <div>
-        <Calendar />
-      </div>
+      <div>123</div>
     </>
   );
 }
