@@ -3,3 +3,32 @@
   color: #fff;
   background-color: red;
 }
+
+.calendayHome {
+  background-color: #fff4e3;
+  width: 100svw;
+  height: 100svh;
+}
+
+.calendarDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.react-calendar__navigation button {
+  font-size: 2rem;
+}
+.react-calendar__tile--now {
+  background-color: #fff !important;
+  border: 3px solid #ffb762 !important;
+}
+.react-calendar__tile--active {
+  color: black !important;
+  background-color: #ffb762 !important;
+}
+.react-calendar__month-view__days__day {
+  height: 4rem !important;
+}
