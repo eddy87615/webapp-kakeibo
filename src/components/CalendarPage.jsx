@@ -2,8 +2,14 @@ import HeaderBtn from './HeaderBtn';
 import './CalendarPage.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { useEffect } from 'react';
 
 function CalendarPage() {
+  useEffect(() => {
+    document.getElementById('theme-color').setAttribute('content', '#fff4e3');
+    document.body.style.backgroundColor = '#fff4e3';
+  }, []);
+
   const formatDay = (locale, date) => {
     return date.getDate(); // 只顯示日期數字
   };
