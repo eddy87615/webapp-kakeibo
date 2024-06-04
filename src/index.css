@@ -13,6 +13,8 @@
   font-size: 12px;
 
   --text-color: black;
+
+  -webkit-touch-callout: none; /* 禁用链接长按菜单（iOS Safari） */
 }
 
 body,
