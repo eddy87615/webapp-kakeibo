@@ -13,6 +13,7 @@ function CalendarPage() {
   const formatDay = (locale, date) => {
     return date.getDate(); // 只顯示日期數字
   };
+
   return (
     <div className="calendayHome">
       <div className="headerArea">
@@ -27,7 +28,7 @@ function CalendarPage() {
         <li>月合計支出：111</li>
         <li>月合計収入：222</li>
       </ul>
-      <button>今日の明細</button>
+      <button className="todayReceive">今日の明細</button>
     </div>
   );
 }

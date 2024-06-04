@@ -29,6 +29,8 @@ html {
   height: 100svh;
 
   color: #000;
+
+  touch-action: manipulation;
 }
 
 @media (prefers-color-scheme: dark) {

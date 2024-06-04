@@ -5,6 +5,10 @@ import './index.css';
 import App from './App';
 
 const registerServiceWorker = async () => {
+  document.addEventListener('touchstart', function (event) {
+    event.preventDefault();
+  });
+
   if ('serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.register(
