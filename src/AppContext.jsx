@@ -61,6 +61,28 @@ export const AppProvider = ({ children }) => {
     setCurrentDate(newDate);
   };
 
+  const getMonthlyTotal = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    Object.keys(items).forEach((dateKey) => {
+      const itemDate = new Date(dateKey);
+      if (itemDate.getFullYear() === year && itemDate.getMonth() === month) {
+        items[dateKey].forEach((item) => {
+          if (item.type === 'income') {
+            totalIncome += item.price;
+          } else {
+            totalExpense += item.price;
+          }
+        });
+      }
+    });
+
+    return { totalIncome, totalExpense };
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -72,6 +94,7 @@ export const AppProvider = ({ children }) => {
         items: items[currentDate.toDateString()] || [],
         changeDate,
         currentDate,
+        getMonthlyTotal,
       }}
     >
       {children}

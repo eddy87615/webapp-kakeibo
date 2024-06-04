@@ -3,8 +3,11 @@ import './CalendarPage.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useEffect } from 'react';
+import { useAppContext } from '../AppContext';
 
 function CalendarPage() {
+  const { currentDate, getMonthlyTotal } = useAppContext();
+
   useEffect(() => {
     document.getElementById('theme-color').setAttribute('content', '#fff4e3');
     document.body.style.backgroundColor = '#fff4e3';
@@ -13,6 +16,8 @@ function CalendarPage() {
   const formatDay = (locale, date) => {
     return date.getDate(); // 只顯示日期數字
   };
+
+  const { totalExpense, totalIncome } = getMonthlyTotal(currentDate);
 
   return (
     <div className="calendayHome">
@@ -25,8 +30,8 @@ function CalendarPage() {
         <Calendar locale="ja-JP" calendarType="gregory" formatDay={formatDay} />
       </div>
       <ul className="accountAll">
-        <li>月合計支出：111</li>
-        <li>月合計収入：222</li>
+        <li>月合計支出：{totalExpense}</li>
+        <li>月合計収入：{totalIncome}</li>
       </ul>
       <button className="todayReceive">今日の明細</button>
     </div>
