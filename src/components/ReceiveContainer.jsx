@@ -16,46 +16,48 @@ export default function ReceiveContainer() {
 
   return (
     <>
-      <ol className="receiveContainer">
-        <h1>今日の明細</h1>
-        {items.map((entry, index) => (
-          <div key={index}>
-            <li className="receiveList">
-              <span className="listName">{entry.itemName}</span>
-              <span className="listPrice">{entry.price}</span>
-              <button
-                className="deleteBtn"
-                onClick={() => {
-                  handleDeleteItems(index);
-                }}
+      <div className="receiveandBtn">
+        <ol className="receiveContainer">
+          <h1>今日の明細</h1>
+          {items.map((entry, index) => (
+            <div key={index}>
+              <li className="receiveList">
+                <span className="listName">{entry.itemName}</span>
+                <span className="listPrice">{entry.price}</span>
+                <button
+                  className="deleteBtn"
+                  onClick={() => {
+                    handleDeleteItems(index);
+                  }}
+                >
+                  削除
+                </button>
+              </li>
+              <span
+                className={`${entry.memo === '' ? '' : 'receiveDescription'}`}
               >
-                削除
-              </button>
-            </li>
-            <span
-              className={`${entry.memo === '' ? '' : 'receiveDescription'}`}
-            >
-              {entry.memo}
-            </span>
+                {entry.memo}
+              </span>
+            </div>
+          ))}
+          <div className="totalPriceArea">
+            <p className="totalPriceAreaTotal">
+              合計：<span>{totalIncome + totalExpense}</span>
+            </p>
+            <span className="line" />
+            <p className="totalPriceAreaTotalExpense">
+              合計支出：<span>{totalExpense}</span>
+            </p>
+            <p className="totalPriceAreaTotalIncome">
+              合計収入：<span>{totalIncome}</span>
+            </p>
           </div>
-        ))}
-        <div className="totalPriceArea">
-          <p className="totalPriceAreaTotal">
-            合計：<span>{totalIncome + totalExpense}</span>
-          </p>
-          <span className="line" />
-          <p className="totalPriceAreaTotalExpense">
-            合計支出：<span>{totalExpense}</span>
-          </p>
-          <p className="totalPriceAreaTotalIncome">
-            合計収入：<span>{totalIncome}</span>
-          </p>
+        </ol>
+        <div className="receiveBtnArea">
+          <button>削除</button>
+          <button>保存</button>
+          <button>共有</button>
         </div>
-      </ol>
-      <div className="receiveBtnArea">
-        <button>削除</button>
-        <button>保存</button>
-        <button>共有</button>
       </div>
     </>
   );

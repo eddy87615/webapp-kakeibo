@@ -8,11 +8,16 @@
   border-radius: 15px;
 
   padding: 16px;
+  margin-bottom: 2rem;
 
-  height: 70%;
+  height: 80%;
 
   overflow: scroll;
 }
+.receiveandBtn {
+  height: 100%;
+}
+
 .receiveContainer h1 {
   text-align: center;
   font-size: 28px;
@@ -112,10 +117,10 @@
 }
 
 .receiveBtnArea {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
   bottom: 4%;
-  transform: translate(-50%);
+  transform: translate(-50%); */
 
   display: flex;
   justify-content: center;

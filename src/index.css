@@ -16,7 +16,9 @@
 
   -webkit-touch-callout: none;
 }
-a {
+a,
+button,
+input {
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -44,5 +46,8 @@ html {
   :root {
     /* 覆蓋黑暗模式的設置，仍然使用亮色模式 */
     --text-color: black;
+  }
+  input {
+    background-color: #fff;
   }
 }
