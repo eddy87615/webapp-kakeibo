@@ -9,10 +9,9 @@ function HeaderBtn({ linkName, link, id }) {
 
   const handleClick = (event) => {
     event.preventDefault();
-    // delay
     setTimeout(() => {
       navigate(link);
-    }, 300); // set
+    }, 300);
   };
 
   return (
