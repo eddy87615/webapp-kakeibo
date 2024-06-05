@@ -59,7 +59,7 @@ function CalendarPage() {
       <div className="headerArea">
         <HeaderBtn link="/" linkName="TOP" />
         <h1>カレンダー</h1>
-        <HeaderBtn linkName="今日の明細を削除" id="deleteToday" />
+        <HeaderBtn linkName="今月の明細を削除" id="deleteToday" />
       </div>
       <div className="calendarDiv">
         <Calendar

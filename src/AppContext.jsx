@@ -91,7 +91,7 @@ export const AppProvider = ({ children }) => {
         btnDisabled,
         handleAddItems,
         handleDeleteItems,
-        items: items[currentDate.toDateString()] || [],
+        items,
         changeDate,
         currentDate,
         setCurrentDate,

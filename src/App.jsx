@@ -4,7 +4,7 @@ import Receive from './components/Receive';
 import CalendarPage from './components/CalendarPage';
 import Home from './components/Home';
 import ReceiveContainer from './components/ReceiveContainer';
-// import InstallPWAButton from './InstallPWAButton';
+import OpenPage from './components/OpenPage';
 import { useEffect, useRef } from 'react';
 
 export default function App() {
@@ -44,6 +44,7 @@ export default function App() {
   return (
     <AppProvider>
       <Router>
+        {/* <OpenPage /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Receive" element={<Receive />} />
