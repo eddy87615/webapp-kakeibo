@@ -1,15 +1,22 @@
+import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../AppContext';
 import './ReceiveContainer.css';
 
 export default function ReceiveContainer() {
   const { items, handleDeleteItems } = useAppContext();
-  console.log('Received items:', items);
+  const location = useLocation();
+  const { date } = location.state || {};
 
-  const totalIncome = items.reduce(
+  const selectedDate = date
+    ? new Date(date).toDateString()
+    : new Date().toDateString();
+  const filteredItems = items[selectedDate] || [];
+
+  const totalIncome = filteredItems.reduce(
     (sum, item) => (item.type === 'income' ? sum + item.price : sum),
     0
   );
-  const totalExpense = items.reduce(
+  const totalExpense = filteredItems.reduce(
     (sum, item) => (item.type === 'expense' ? sum + item.price : sum),
     0
   );
@@ -18,8 +25,10 @@ export default function ReceiveContainer() {
     <>
       <div className="receiveandBtn">
         <ol className="receiveContainer">
-          <h1>今日の明細</h1>
-          {items.map((entry, index) => (
+          <h1>{`${new Date(selectedDate).getFullYear()}年${
+            new Date(selectedDate).getMonth() + 1
+          }月${new Date(selectedDate).getDate()}日の明細`}</h1>
+          {filteredItems.map((entry, index) => (
             <div key={index}>
               <li className="receiveList">
                 <span className="listName">{entry.itemName}</span>

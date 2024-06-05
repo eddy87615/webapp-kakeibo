@@ -99,19 +99,24 @@
 
 .react-calendar__month-view__days__day {
   height: 4rem !important;
-}
-.react-calendar__month-view__days__day {
   border: 3px solid white !important;
   color: #000 !important;
+  background-color: #ffb762;
 }
+
 .react-calendar__month-view__days__day--weekend {
   background-color: #71d7f7 !important;
   color: red !important;
 }
-.react-calendar__tile--active,
-.react-calendar button:enabled:hover {
-  color: black !important;
+.react-calendar__tile--active {
+  transform: scale(1.1) !important;
   background-color: #ffb762 !important;
+  box-shadow: 1px 1px 5px 2px rgb(105, 105, 105);
+}
+.react-calendar button:enabled:hover {
+  background-color: #ffb762 !important;
+  color: inherit !important;
+  cursor: default !important;
 }
 
 .react-calendar__month-view__days__day--neighboringMonth,
