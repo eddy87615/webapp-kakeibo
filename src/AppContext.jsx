@@ -7,7 +7,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [sortMoney, setSortMoney] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState({});
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // 在 useEffect 中读取 localStorage
@@ -94,6 +94,7 @@ export const AppProvider = ({ children }) => {
         items: items[currentDate.toDateString()] || [],
         changeDate,
         currentDate,
+        setCurrentDate,
         getMonthlyTotal,
       }}
     >

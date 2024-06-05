@@ -108,7 +108,8 @@
   background-color: #71d7f7 !important;
   color: red !important;
 }
-.react-calendar__tile--active {
+.react-calendar__tile--active,
+.react-calendar button:enabled:hover {
   color: black !important;
   background-color: #ffb762 !important;
 }
