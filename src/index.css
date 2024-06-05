@@ -47,7 +47,9 @@ html {
     /* 覆蓋黑暗模式的設置，仍然使用亮色模式 */
     --text-color: black;
   }
-  input {
+  input,
+  textarea {
     background-color: #fff;
+    color: #000;
   }
 }
