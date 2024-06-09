@@ -107,6 +107,12 @@
   color: #000 !important;
   background-color: #ffb762;
 }
+.react-calendar__tile:enabled:hover {
+  background-color: transparent !important;
+}
+.react-calendar__tile:enabled:focus {
+  background-color: #ffb762 !important;
+}
 
 .react-calendar__month-view__days__day--weekend {
   background-color: #71d7f7 !important;
