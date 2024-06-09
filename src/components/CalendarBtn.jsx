@@ -1,9 +1,7 @@
-/* eslint-disable react/prop-types */
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 import { useAppContext } from '../AppContext';
 import './CalendarBtn.css';
 
-// eslint-disable-next-line no-unused-vars
 export default function CalendarBtn() {
   const { currentDate, changeDate } = useAppContext();
 

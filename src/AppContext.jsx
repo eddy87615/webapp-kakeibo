@@ -44,14 +44,13 @@ export const AppProvider = ({ children }) => {
 
   //delete
   const handleDeleteItems = (dateKey, index = null) => {
-    let newItems;
+    let newItems = { ...items };
     if (index !== null) {
-      newItems = {
-        ...items,
-        [dateKey]: items[dateKey].filter((_, i) => i !== index),
-      };
+      newItems[dateKey] = newItems[dateKey].filter((_, i) => i !== index);
+      if (newItems[dateKey].length === 0) {
+        delete newItems[dateKey];
+      }
     } else {
-      newItems = { ...items };
       delete newItems[dateKey];
     }
     setItems(newItems);

@@ -1,14 +1,21 @@
 import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../AppContext';
 import './ReceiveContainer.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ConfirmWindow from './ConfirmWindow';
 
 export default function ReceiveContainer() {
-  const { items, handleDeleteItems } = useAppContext();
+  const { currentDate, items, handleDeleteItems } = useAppContext();
   const location = useLocation();
   const { date } = location.state || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filteredItems, setFilteredItems] = useState([]);
+  useEffect(() => {
+    const dateKey = currentDate.toDateString();
+    const newFilteredItems = items[dateKey] || [];
+    setFilteredItems(newFilteredItems);
+  }, [currentDate, items]);
+
   const handleDeleteAll = () => {
     setTimeout(() => {
       handleDeleteItems(selectedDate);
@@ -29,7 +36,6 @@ export default function ReceiveContainer() {
   const selectedDate = date
     ? new Date(date).toDateString()
     : new Date().toDateString();
-  const filteredItems = items[selectedDate] || [];
 
   const totalIncome = filteredItems.reduce(
     (sum, item) => (item.type === 'income' ? sum + item.price : sum),
@@ -44,9 +50,9 @@ export default function ReceiveContainer() {
     <>
       <div className="receiveandBtn">
         <ol className="receiveContainer">
-          <h1>{`${new Date(selectedDate).getFullYear()}年${
-            new Date(selectedDate).getMonth() + 1
-          }月${new Date(selectedDate).getDate()}日の明細`}</h1>
+          <h1>{`${currentDate.getFullYear()}年${
+            currentDate.getMonth() + 1
+          }月${currentDate.getDate()}日の明細`}</h1>
           {filteredItems.map((entry, index) => (
             <div key={index}>
               <li className="receiveList">
