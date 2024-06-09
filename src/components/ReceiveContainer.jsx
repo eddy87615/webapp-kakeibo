@@ -1,11 +1,30 @@
 import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../AppContext';
 import './ReceiveContainer.css';
+import { useState } from 'react';
+import ConfirmWindow from './ConfirmWindow';
 
 export default function ReceiveContainer() {
   const { items, handleDeleteItems } = useAppContext();
   const location = useLocation();
   const { date } = location.state || {};
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleDeleteAll = () => {
+    setTimeout(() => {
+      handleDeleteItems(selectedDate);
+      setIsModalOpen(false);
+    }, 300);
+  };
+  const handleCloseModal = () => {
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 300);
+  };
+  const handleOpenModal = () => {
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 300);
+  };
 
   const selectedDate = date
     ? new Date(date).toDateString()
@@ -63,11 +82,18 @@ export default function ReceiveContainer() {
           </div>
         </ol>
         <div className="receiveBtnArea">
-          <button>削除</button>
+          <button onClick={handleOpenModal}>削除</button>
           <button>保存</button>
           <button>共有</button>
         </div>
       </div>
+
+      <ConfirmWindow
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleDeleteAll}
+        confirmText="本当に今日の記録を全て削除しますか？"
+      />
     </>
   );
 }

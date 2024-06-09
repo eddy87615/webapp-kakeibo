@@ -5,30 +5,32 @@ import 'react-calendar/dist/Calendar.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../AppContext';
+import ConfirmWindow from './ConfirmWindow';
 
 function CalendarPage() {
-  const { currentDate, setCurrentDate, getMonthlyTotal } = useAppContext();
+  useEffect(() => {
+    document.getElementById('theme-color').setAttribute('content', '#fff4e3');
+    document.body.style.backgroundColor = '#fff4e3';
+  }, []);
+
+  const {
+    currentDate,
+    setCurrentDate,
+    getMonthlyTotal,
+    handleDeleteMonthData,
+  } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [displayedMonth, setDisplayedMonth] = useState(currentDate); // 新增状态来存储显示的月份
   const [monthlyTotal, setMonthlyTotal] = useState({
     totalExpense: 0,
     totalIncome: 0,
   });
-
-  useEffect(() => {
-    document.getElementById('theme-color').setAttribute('content', '#fff4e3');
-    document.body.style.backgroundColor = '#fff4e3';
-  }, []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const total = getMonthlyTotal(displayedMonth);
     setMonthlyTotal(total);
   }, [displayedMonth, getMonthlyTotal]);
-
-  // const handleMonthChange = ({ activeStartDate }) => {
-  //   setSelectedMonth(activeStartDate);
-  //   setCurrentDate(activeStartDate);
-  // };
 
   // 只顯示日期數字
   const formatDay = (locale, date) => {
@@ -47,19 +49,47 @@ function CalendarPage() {
   const navigate = useNavigate();
 
   const handleTodaysList = () => {
-    navigate('/Receive', { state: { date: selectedDate } });
+    setTimeout(() => {
+      navigate('/Receive', { state: { date: selectedDate } });
+    }, 300);
   };
   const isToday = selectedDate.toDateString() === new Date().toDateString();
   const buttonText = isToday
     ? '今日の明細'
     : `${selectedDate.getMonth() + 1}月${selectedDate.getDate()}日の明細`;
 
+  const handleDeleteCurrentMonth = () => {
+    setTimeout(() => {
+      const year = displayedMonth.getFullYear();
+      const month = displayedMonth.getMonth();
+      console.log(`Deleting data for year: ${year}, month: ${month}`);
+      handleDeleteMonthData(year, month);
+      setIsModalOpen(false);
+    }, 300);
+  };
+
+  const handleOpenMonthModal = () => {
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 300);
+  };
+
+  const handleCloseMonthModal = () => {
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 300);
+  };
+
   return (
     <div className="calendayHome">
       <div className="headerArea">
         <HeaderBtn link="/" linkName="TOP" />
         <h1>カレンダー</h1>
-        <HeaderBtn linkName="今月の明細を削除" id="deleteToday" />
+        <HeaderBtn
+          linkName="今月の明細を削除"
+          id="deleteMonth"
+          onClick={handleOpenMonthModal}
+        />
       </div>
       <div className="calendarDiv">
         <Calendar
@@ -78,6 +108,12 @@ function CalendarPage() {
       <button className="todayReceive" onClick={handleTodaysList}>
         {buttonText}
       </button>
+      <ConfirmWindow
+        isOpen={isModalOpen}
+        onClose={handleCloseMonthModal}
+        onConfirm={handleDeleteCurrentMonth}
+        confirmText="本当に今月の記録を全て削除しますか？"
+      />
     </div>
   );
 }

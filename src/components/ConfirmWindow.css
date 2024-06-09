@@ -1,0 +1,61 @@
+.confirmbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.confirmbg h2 {
+  font-size: 2rem;
+  text-align: center;
+  padding-inline: 2rem;
+}
+
+.confirmwindow {
+  border: 5px solid black;
+  border-radius: 15px;
+
+  height: 30%;
+  width: 90%;
+  background: #fff;
+  color: #000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmbtnarea {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.confirmbtnarea button {
+  border: 5px solid #000;
+  border-radius: 15px;
+
+  font-size: 1.8rem;
+  font-weight: bold;
+
+  padding: 1rem 3rem;
+
+  box-shadow: 4px 4px 0 0 black;
+}
+.confirmbtnarea button:nth-child(1) {
+  background-color: #fff;
+}
+.confirmbtnarea button:nth-child(2) {
+  background-color: #ff8888;
+}
+
+.confirmbtnarea button:active {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+  transition: 0.3s;
+}

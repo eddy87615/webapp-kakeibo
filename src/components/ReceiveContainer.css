@@ -154,3 +154,8 @@
 .receiveBtnArea button:nth-child(3) {
   background-color: #93dfff;
 }
+.receiveBtnArea button:active {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+  transition: 0.3s;
+}

@@ -28,11 +28,13 @@ export const AppProvider = ({ children }) => {
     }
   }, []);
 
+  //切換收支面板
   const handleSwitch = () => {
     setSortMoney(!sortMoney);
     setBtnDisabled(!btnDisabled);
   };
 
+  //add
   const handleAddItems = (item) => {
     const dateKey = currentDate.toDateString();
     const newItems = { ...items, [dateKey]: [...(items[dateKey] || []), item] };
@@ -40,12 +42,31 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem('items', JSON.stringify(newItems));
   };
 
-  const handleDeleteItems = (index) => {
-    const dateKey = currentDate.toDateString();
-    const newItems = {
-      ...items,
-      [dateKey]: items[dateKey].filter((_, i) => i !== index),
-    };
+  //delete
+  const handleDeleteItems = (dateKey, index = null) => {
+    let newItems;
+    if (index !== null) {
+      newItems = {
+        ...items,
+        [dateKey]: items[dateKey].filter((_, i) => i !== index),
+      };
+    } else {
+      newItems = { ...items };
+      delete newItems[dateKey];
+    }
+    setItems(newItems);
+    localStorage.setItem('items', JSON.stringify(newItems));
+  };
+
+  const handleDeleteMonthData = (year, month) => {
+    const newItems = { ...items };
+    Object.keys(newItems).forEach((dateKey) => {
+      const itemDate = new Date(dateKey);
+      if (itemDate.getFullYear() === year && itemDate.getMonth() === month) {
+        console.log(`Deleting data for dateKey: ${dateKey}`);
+        delete newItems[dateKey];
+      }
+    });
     setItems(newItems);
     localStorage.setItem('items', JSON.stringify(newItems));
   };
@@ -91,6 +112,7 @@ export const AppProvider = ({ children }) => {
         btnDisabled,
         handleAddItems,
         handleDeleteItems,
+        handleDeleteMonthData,
         items,
         changeDate,
         currentDate,

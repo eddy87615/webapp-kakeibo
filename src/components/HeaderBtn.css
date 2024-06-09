@@ -18,6 +18,18 @@
   box-shadow: 4px 4px 0 0 black;
 }
 
+.deleteMode {
+  box-sizing: inherit;
+
+  font-size: 1.2rem;
+
+  padding: 0;
+
+  color: #000;
+
+  background-color: #ff8888;
+}
+
 .headerBtn:active {
   box-shadow: none;
   transform: translate(4px, 4px);
