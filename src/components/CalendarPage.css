@@ -96,7 +96,11 @@
   justify-content: center;
   align-items: center;
 }
-
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile {
+  color: #000 !important;
+}
 .react-calendar__month-view__days__day {
   height: 4rem !important;
   border: 3px solid white !important;
