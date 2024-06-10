@@ -60,9 +60,7 @@ export default function ReceiveContainer() {
                 <span className="listPrice">{entry.price}</span>
                 <button
                   className="deleteBtn"
-                  onClick={() => {
-                    handleDeleteItems(index);
-                  }}
+                  onClick={() => handleDeleteItems(index, selectedDate)}
                 >
                   削除
                 </button>

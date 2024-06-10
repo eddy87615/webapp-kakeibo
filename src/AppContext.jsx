@@ -43,18 +43,20 @@ export const AppProvider = ({ children }) => {
   };
 
   //delete
-  const handleDeleteItems = (dateKey, index = null) => {
-    let newItems = { ...items };
-    if (index !== null) {
-      newItems[dateKey] = newItems[dateKey].filter((_, i) => i !== index);
-      if (newItems[dateKey].length === 0) {
+  const handleDeleteItems = (index, dateKey) => {
+    const newItems = { ...items };
+    if (newItems[dateKey]) {
+      if (index !== null) {
+        newItems[dateKey] = newItems[dateKey].filter((_, i) => i !== index);
+        if (newItems[dateKey].length === 0) {
+          delete newItems[dateKey];
+        }
+      } else {
         delete newItems[dateKey];
       }
-    } else {
-      delete newItems[dateKey];
+      setItems(newItems);
+      localStorage.setItem('items', JSON.stringify(newItems));
     }
-    setItems(newItems);
-    localStorage.setItem('items', JSON.stringify(newItems));
   };
 
   const handleDeleteMonthData = (year, month) => {
