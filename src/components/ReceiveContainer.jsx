@@ -79,9 +79,10 @@ export default function ReceiveContainer() {
     cloneContainer.style.left = '-9999px';
     cloneContainer.style.top = '-9999px';
     cloneContainer.style.width = `${container.scrollWidth}px`;
-    cloneContainer.style.height = `${container.scrollHeight}px`; // 使用 scrollHeight
+    cloneContainer.style.height = `${container.scrollHeight}px`;
     cloneContainer.style.overflow = 'visible';
 
+    // 隐藏删除按钮
     const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
     deleteBtns.forEach((btn) => {
       btn.style.opacity = '0';
@@ -90,10 +91,6 @@ export default function ReceiveContainer() {
     html2canvas(cloneContainer, {
       useCORS: true,
       scale: 1,
-      onclone: (document) => {
-        const clonedElement = document.querySelector('.receiveContainer');
-        clonedElement.style.overflow = 'visible';
-      },
     })
       .then((canvas) => {
         canvas.toBlob((blob) => {
