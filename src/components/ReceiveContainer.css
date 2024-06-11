@@ -157,7 +157,8 @@
 .receiveBtnArea button {
   color: #000;
 
-  width: 112px;
+  /* width: 112px; */
+  width: calc(90vw / 3);
   height: 60px;
 
   border: solid 5px #000;

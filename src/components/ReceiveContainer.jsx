@@ -96,11 +96,17 @@ export default function ReceiveContainer() {
       },
     })
       .then((canvas) => {
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/jpeg');
-        link.download = 'receiveContainer.jpg';
-        link.click();
-        document.body.removeChild(cloneContainer); // 完成后移除克隆的容器
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'receiveContainer.jpg';
+          document.body.appendChild(link); // Firefox requires the link to be in the body
+          link.click();
+          document.body.removeChild(link); // remove the link when done
+          URL.revokeObjectURL(url); // clean up the URL object
+          document.body.removeChild(cloneContainer); // Remove the clone container when done
+        }, 'image/jpeg');
       })
       .catch((err) => {
         console.error('html2canvas error:', err);
