@@ -8,6 +8,18 @@
   z-index: 1;
 
   overflow: hidden;
+
+  text-align: center;
+}
+.openpagebg h1 {
+  font-size: 300%;
+
+  margin: 0;
+}
+.openpagebg p {
+  font-size: 120%;
+
+  margin: 0;
 }
 .left {
   width: 100%;

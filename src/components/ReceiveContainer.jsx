@@ -5,20 +5,28 @@ import { useEffect, useState } from 'react';
 import ConfirmWindow from './ConfirmWindow';
 
 export default function ReceiveContainer() {
-  const { currentDate, items, handleDeleteItems } = useAppContext();
+  const { items, handleDeleteItems, setCurrentDate } = useAppContext();
+
   const location = useLocation();
   const { date } = location.state || {};
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
+
+  const selectedDate = date
+    ? new Date(date).toDateString()
+    : new Date().toDateString();
+
   useEffect(() => {
-    const dateKey = currentDate.toDateString();
-    const newFilteredItems = items[dateKey] || [];
+    setCurrentDate(new Date(selectedDate));
+    // const dateKey = currentDate.toDateString();
+    const newFilteredItems = items[selectedDate] || [];
     setFilteredItems(newFilteredItems);
-  }, [currentDate, items]);
+  }, [selectedDate, items, setCurrentDate]);
 
   const handleDeleteAll = () => {
     setTimeout(() => {
-      handleDeleteItems(selectedDate);
+      handleDeleteItems(null, selectedDate);
       setIsModalOpen(false);
     }, 300);
   };
@@ -33,10 +41,6 @@ export default function ReceiveContainer() {
     }, 300);
   };
 
-  const selectedDate = date
-    ? new Date(date).toDateString()
-    : new Date().toDateString();
-
   const totalIncome = filteredItems.reduce(
     (sum, item) => (item.type === 'income' ? sum + item.price : sum),
     0
@@ -50,14 +54,22 @@ export default function ReceiveContainer() {
     <>
       <div className="receiveandBtn">
         <ol className="receiveContainer">
-          <h1>{`${currentDate.getFullYear()}年${
-            currentDate.getMonth() + 1
-          }月${currentDate.getDate()}日の明細`}</h1>
+          <h1>{`${new Date(selectedDate).getFullYear()}年${
+            new Date(selectedDate).getMonth() + 1
+          }月${new Date(selectedDate).getDate()}日の明細`}</h1>
           {filteredItems.map((entry, index) => (
             <div key={index}>
               <li className="receiveList">
                 <span className="listName">{entry.itemName}</span>
-                <span className="listPrice">{entry.price}</span>
+                <span
+                  className={`listPrice ${
+                    entry.type === 'expense'
+                      ? 'receiveList_minus'
+                      : 'receiveList_plus'
+                  }`}
+                >
+                  {Math.abs(entry.price)}
+                </span>
                 <button
                   className="deleteBtn"
                   onClick={() => handleDeleteItems(index, selectedDate)}

@@ -15,7 +15,7 @@
   overflow: scroll;
 }
 .receiveandBtn {
-  height: 100%;
+  height: calc(100vh - 114px);
 }
 
 .receiveContainer h1 {
@@ -37,12 +37,16 @@
   font-size: 20px;
   font-weight: bold;
 }
-.receiveList span::before {
-  content: '￥';
+.receiveList_minus::before {
+  content: '- ￥';
   position: absolute;
-  left: 44%;
+  left: 40%;
 }
-
+.receiveList_plus::before {
+  content: '+ ￥';
+  position: absolute;
+  left: 40%;
+}
 .receiveList::before {
   content: '';
   position: absolute;

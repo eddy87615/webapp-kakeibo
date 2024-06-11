@@ -1,4 +1,5 @@
 import { useAppContext } from '../AppContext';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import HeaderBtn from './HeaderBtn';
 import CalendarBtn from './CalendarBtn';
@@ -14,11 +15,25 @@ export default function Home() {
     items,
     setItems,
   } = useAppContext();
-  console.log('setItems in Home component:', setItems);
+
+  const navigate = useNavigate();
+
+  const handleTodaysListonTop = () => {
+    const today = new Date().toDateString();
+    setTimeout(() => {
+      navigate('Receive', { state: { date: today } });
+    });
+  };
+
   return (
     <div className={`${sortMoney ? 'homeIncome' : 'homeSpend'}`}>
       <div className="headerArea">
-        <HeaderBtn link="/Receive" linkName="今日の明細" />
+        <HeaderBtn
+          // link="/Receive"
+          linkName="今日の明細"
+          onClick={handleTodaysListonTop}
+          id="receiveoftoday"
+        />
         <CalendarBtn items={items} setItems={setItems} />
         <HeaderBtn link="/CalendarPage" linkName="カレンダー" id="calendar" />
       </div>

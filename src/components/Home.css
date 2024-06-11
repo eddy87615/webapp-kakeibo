@@ -1,5 +1,6 @@
 .headerArea {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
 
@@ -45,4 +46,12 @@
 
   background-color: black;
   border-radius: 20px;
+}
+
+#receiveoftoday {
+  background-color: #fff;
+
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #000;
 }
