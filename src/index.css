@@ -40,6 +40,8 @@ html {
   color: #000;
 
   touch-action: manipulation;
+
+  scrollbar-width: none;
 }
 
 @media (prefers-color-scheme: dark) {

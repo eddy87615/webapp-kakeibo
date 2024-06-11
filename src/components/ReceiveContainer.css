@@ -1,21 +1,30 @@
 .receiveContainer {
   position: relative;
 
-  margin: 0 24px;
+  /* margin: 0 auto; */
 
   border: solid 5px #000;
   background-color: #fff;
   border-radius: 15px;
 
-  padding: 16px;
-  margin-bottom: 1rem;
+  padding: 0;
+  margin: 0;
 
   height: 80%;
+  width: 90%;
 
-  overflow: scroll;
+  box-sizing: border-box;
+
+  overflow-y: scroll;
 }
 .receiveandBtn {
   height: calc(100vh - 114px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4%;
 }
 
 .receiveContainer h1 {
@@ -31,33 +40,43 @@
   display: flex;
   justify-content: space-between;
 
-  padding-left: 5%;
-  margin-bottom: 4%;
-
-  font-size: 20px;
+  font-size: 150%;
   font-weight: bold;
 }
+.listcatogarybg_income {
+  background-color: #ffe5b3;
+
+  margin-bottom: 2%;
+  padding: 2%;
+}
+.listcatogarybg_expense {
+  background-color: #ffdddd;
+
+  margin-bottom: 2%;
+  padding: 2%;
+}
+
 .receiveList_minus::before {
-  content: '- ￥';
+  content: '-￥';
   position: absolute;
   left: 40%;
 }
 .receiveList_plus::before {
-  content: '+ ￥';
+  content: '+￥';
   position: absolute;
   left: 40%;
 }
-.receiveList::before {
+/* .receiveList::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 0;
   transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background-color: #000;
-}
+} */
 
 .receiveDescription {
   display: block;
@@ -65,7 +84,7 @@
   font-size: 16px;
   margin: 8px 0;
 
-  border-bottom: solid 5px #000;
+  /* border-bottom: solid 5px #000; */
 
   width: 100%;
 
@@ -85,19 +104,21 @@
 }
 
 .listName {
-  width: 44%;
+  width: 40%;
 
   word-break: break-all;
 }
 .listPrice {
-  width: 32%;
+  width: 28%;
   word-break: break-all;
 }
 
 .totalPriceArea {
-  width: 100%;
+  /* width: 100%; */
 
   font-weight: bold;
+
+  padding: 2%;
 }
 .totalPriceAreaTotal {
   font-size: 25px;
@@ -162,4 +183,10 @@
   box-shadow: none;
   transform: translate(4px, 4px);
   transition: 0.3s;
+}
+
+.blackUnderList {
+  width: 100%;
+  height: 10px;
+  background-color: #fff;
 }
