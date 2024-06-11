@@ -63,32 +63,7 @@ export default function ReceiveContainer() {
       return;
     }
 
-    const cloneContainer = container.cloneNode(true);
-    document.body.appendChild(cloneContainer);
-
-    // 修改克隆的容器中的 h1 标签内容
-    const h1 = cloneContainer.querySelector('h1');
-    if (h1) {
-      h1.textContent = `${new Date(selectedDate).getFullYear()}年${
-        new Date(selectedDate).getMonth() + 1
-      }月${new Date(selectedDate).getDate()}日の明細`;
-    }
-
-    // 设置样式以确保克隆的容器完全展开
-    cloneContainer.style.position = 'absolute';
-    cloneContainer.style.left = '-9999px';
-    cloneContainer.style.top = '-9999px';
-    cloneContainer.style.width = `${container.scrollWidth}px`;
-    cloneContainer.style.height = `${container.scrollHeight}px`;
-    cloneContainer.style.overflow = 'visible';
-
-    // 隐藏删除按钮
-    const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
-    deleteBtns.forEach((btn) => {
-      btn.style.opacity = '0';
-    });
-
-    html2canvas(cloneContainer, {
+    html2canvas(container, {
       useCORS: true,
       scale: 1,
     })
@@ -98,16 +73,14 @@ export default function ReceiveContainer() {
           const link = document.createElement('a');
           link.href = url;
           link.download = 'receiveContainer.jpg';
-          document.body.appendChild(link); // Firefox requires the link to be in the body
+
+          // 直接在当前的点击事件中触发下载
           link.click();
-          document.body.removeChild(link); // remove the link when done
-          URL.revokeObjectURL(url); // clean up the URL object
-          document.body.removeChild(cloneContainer); // Remove the clone container when done
+          URL.revokeObjectURL(url); // 清理生成的URL对象
         }, 'image/jpeg');
       })
       .catch((err) => {
         console.error('html2canvas error:', err);
-        document.body.removeChild(cloneContainer);
       });
   };
 
