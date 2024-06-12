@@ -22,40 +22,63 @@ export default function App() {
   });
 
   useEffect(() => {
-    const handleTouchStart = (event) => {
-      if (event.target.tagName.toLowerCase() === 'a') {
-        timerRef.current = setTimeout(() => {
-          event.preventDefault();
-        }, 500); // 如果需要更短的时间，可以调整这个数值
-      }
-    };
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-    const handleTouchEnd = (event) => {
-      if (event.target.tagName.toLowerCase() === 'a') {
-        clearTimeout(timerRef.current);
-      }
+    const handleTouchStart = (event) => {
+      // 记录起始触摸点
+      touchStartX = event.touches[0].pageX;
+      touchStartY = event.touches[0].pageY;
     };
 
     const handleTouchMove = (event) => {
-      if (event.target.tagName.toLowerCase() === 'a') {
-        clearTimeout(timerRef.current);
+      const touchEndX = event.changedTouches[0].pageX;
+      const touchEndY = event.changedTouches[0].pageY;
+
+      // 计算触摸移动的距离
+      const diffX = Math.abs(touchStartX - touchEndX);
+      const diffY = Math.abs(touchStartY - touchEndY);
+
+      // 判断为横向滑动
+      if (diffX > diffY) {
+        event.preventDefault();
       }
     };
 
     document.addEventListener('touchstart', handleTouchStart, {
       passive: false,
     });
-    document.addEventListener('touchend', handleTouchEnd);
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart, {
-        passive: false,
-      });
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    let timer = null;
+    const handleLongPress = (event) => {
+      timer = setTimeout(() => {
+        event.preventDefault();
+        // 处理长按逻辑
+      }, 500); // 长按时间阈值
+    };
+
+    const handleTouchEnd = () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+
+    document.addEventListener('touchstart', handleLongPress, {
+      passive: false,
+    });
+    document.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      document.removeEventListener('touchstart', handleLongPress);
       document.removeEventListener('touchend', handleTouchEnd);
-      document.removeEventListener('touchmove', handleTouchMove, {
-        passive: false,
-      });
     };
   }, []);
 

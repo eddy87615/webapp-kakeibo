@@ -97,7 +97,9 @@ export default function InputForm() {
         <div className="inputbox">
           <label>金額</label>
           <input
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             placeholder={sortMoney ? '12000' : '1290'}
             value={price}
             onChange={(e) => setPrice(e.target.value)}
