@@ -18,7 +18,8 @@
   overflow-y: scroll;
 }
 .receiveandBtn {
-  height: calc(100vh - 114px);
+  /* height: calc(100vh - 114px); */
+  height: 90vh;
 
   display: flex;
   flex-direction: column;
