@@ -18,8 +18,8 @@ export default function ConfirmWindow({
       <div className="confirmwindow">
         <h2>{confirmText}</h2>
         <div className="confirmbtnarea">
-          <button onClick={onClose}>取消</button>
-          <button onClick={onConfirm}>確認</button>
+          <button onClick={onClose}>戻る</button>
+          <button onClick={onConfirm}>削除</button>
         </div>
       </div>
     </div>

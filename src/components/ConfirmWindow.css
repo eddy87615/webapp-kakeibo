@@ -54,6 +54,7 @@
 }
 .confirmbtnarea button:nth-child(2) {
   background-color: #ff8888;
+  color: #000;
 }
 
 .confirmbtnarea button:active {

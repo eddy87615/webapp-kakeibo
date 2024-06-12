@@ -117,31 +117,62 @@ export default function ReceiveContainer() {
       return;
     }
 
-    try {
-      const canvas = await html2canvas(container);
-      canvas.toBlob(async (blob) => {
-        const file = new File([blob], 'share_image.jpg', {
-          type: 'image/jpeg',
-        });
-        const shareData = {
-          files: [file],
-          title: 'Share Image',
-          text: 'Check out this image!',
-        };
+    // 克隆容器并应用样式
+    const cloneContainer = container.cloneNode(true);
+    document.body.appendChild(cloneContainer);
 
-        if (navigator.share) {
-          try {
-            await navigator.share(shareData);
-            console.log('Image shared successfully');
-          } catch (error) {
-            console.error('Error sharing:', error);
-          }
-        } else {
-          console.error('Web Share API is not supported in this browser.');
-        }
-      }, 'image/jpeg');
+    // 修改克隆的容器中的 h1 标签内容
+    const h1 = cloneContainer.querySelector('h1');
+    if (h1) {
+      h1.textContent = `${new Date(selectedDate).getFullYear()}年${
+        new Date(selectedDate).getMonth() + 1
+      }月${new Date(selectedDate).getDate()}日の明細`;
+    }
+
+    // 设置样式以确保克隆的容器完全展开
+    cloneContainer.style.position = 'absolute';
+    cloneContainer.style.left = '-9999px';
+    cloneContainer.style.top = '-9999px';
+    cloneContainer.style.width = `${container.scrollWidth}px`;
+    cloneContainer.style.height = `${container.scrollHeight}px`;
+    cloneContainer.style.overflow = 'visible';
+
+    // 隐藏删除按钮
+    const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
+    deleteBtns.forEach((btn) => {
+      btn.style.opacity = '0';
+    });
+
+    try {
+      const canvas = await html2canvas(cloneContainer);
+      const blob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, 'image/jpeg')
+      );
+      const file = new File(
+        [blob],
+        `${new Date(selectedDate).getFullYear()}年${
+          new Date(selectedDate).getMonth() + 1
+        }月${new Date(selectedDate).getDate()}日の明細.jpg`,
+        { type: 'image/jpeg' }
+      );
+
+      const shareData = {
+        files: [file],
+        title: 'Shared Image',
+        text: 'Check out this detailed image!',
+      };
+
+      // 使用 Web Share API 分享图像
+      if (navigator.share) {
+        await navigator.share(shareData);
+        console.log('Image shared successfully');
+      } else {
+        console.error('Web Share API is not supported in this browser.');
+      }
     } catch (error) {
       console.error('Error generating image:', error);
+    } finally {
+      document.body.removeChild(cloneContainer); // 清除克隆容器
     }
   };
 
@@ -208,7 +239,7 @@ export default function ReceiveContainer() {
         <div className="receiveBtnArea">
           <button onClick={handleOpenModal}>削除</button>
           <button onClick={handleShare}>保存</button>
-          <button>共有</button>
+          {/* <button>共有</button> */}
         </div>
       </div>
 
@@ -218,12 +249,6 @@ export default function ReceiveContainer() {
         onConfirm={handleDeleteAll}
         confirmText="本当に今日の記録を全て削除しますか？"
       />
-      {/* <ConfirmWindow
-        isOpen={isSaveModalOpen}
-        onClose={handleCloseSaveModal}
-        onConfirm={handleSave}
-        confirmText="今日の明細を画像として保存しますか？"
-      /> */}
     </>
   );
 }
