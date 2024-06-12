@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../AppContext';
 import './InputForm.css';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function InputForm() {
   const { sortMoney, handleSwitch, btnDisabled, handleAddItems } =
@@ -17,7 +19,7 @@ export default function InputForm() {
   const [itemName, setItemName] = useState('');
   const [price, setPrice] = useState('');
   const [memo, setMemo] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const storedItemName = localStorage.getItem('itemName');
@@ -59,8 +61,9 @@ export default function InputForm() {
     localStorage.removeItem('itemName');
     localStorage.removeItem('price');
     localStorage.removeItem('memo');
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 1000);
+    // setShowAlert(true);
+    // setTimeout(() => setShowAlert(false), 1000);
+    toast.success('記入しました！');
   };
 
   return (
@@ -110,7 +113,14 @@ export default function InputForm() {
         <input type="submit" value="記入" className="submitBtn" />
       </form>
 
-      {showAlert && <div className="doneAlert">記入しました！</div>}
+      {/* {showAlert && <div className="doneAlert">記入しました！</div>} */}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={800}
+        hideProgressBar={true}
+        transition={Slide}
+        theme={'colored'}
+      />
     </>
   );
 }

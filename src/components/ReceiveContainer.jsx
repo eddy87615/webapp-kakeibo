@@ -4,6 +4,8 @@ import './ReceiveContainer.css';
 import { useEffect, useState, useRef } from 'react';
 import ConfirmWindow from './ConfirmWindow';
 import html2canvas from 'html2canvas';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ReceiveContainer() {
   const { items, handleDeleteItems, setCurrentDate } = useAppContext();
@@ -169,8 +171,10 @@ export default function ReceiveContainer() {
       } else {
         console.error('Web Share API is not supported in this browser.');
       }
+      toast.success('明細が保存されました！');
     } catch (error) {
       console.error('Error generating image:', error);
+      toast.success('明細が保存できません！');
     } finally {
       document.body.removeChild(cloneContainer); // 清除克隆容器
     }
@@ -248,6 +252,13 @@ export default function ReceiveContainer() {
         onClose={handleCloseModal}
         onConfirm={handleDeleteAll}
         confirmText="本当に今日の記録を全て削除しますか？"
+      />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={800}
+        hideProgressBar={true}
+        transition={Slide}
+        theme={'colored'}
       />
     </>
   );

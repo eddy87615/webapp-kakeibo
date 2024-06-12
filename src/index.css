@@ -55,3 +55,14 @@ html {
     color: #000;
   }
 }
+
+/* 在你的全局 CSS 文件中 */
+
+.Toastify__toast--success {
+  background-color: #fff !important;
+  color: #000 !important;
+  font-weight: bold;
+
+  border: 5px solid #000;
+  border-radius: 15px !important;
+}

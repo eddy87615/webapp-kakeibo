@@ -5,10 +5,21 @@ import CalendarPage from './components/CalendarPage';
 import Home from './components/Home';
 import ReceiveContainer from './components/ReceiveContainer';
 import OpenPage from './components/OpenPage';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function App() {
   const timerRef = useRef(null);
+  const [showOpenPage, setIsShowOpenPage] = useState(true);
+
+  useEffect(() => {
+    timerRef.current = setTimeout(() => {
+      setIsShowOpenPage(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timerRef.current);
+    };
+  });
 
   useEffect(() => {
     const handleTouchStart = (event) => {
@@ -45,7 +56,7 @@ export default function App() {
   return (
     <AppProvider>
       <Router>
-        {/* <OpenPage /> */}
+        {showOpenPage && <OpenPage />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Receive" element={<Receive />} />
