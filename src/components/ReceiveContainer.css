@@ -159,6 +159,7 @@
   color: #000;
 
   width: 120px;
+  max-width: 120px;
   height: 60px;
 
   border: solid 5px #000;
