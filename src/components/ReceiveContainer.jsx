@@ -12,7 +12,6 @@ export default function ReceiveContainer() {
   const { date } = location.state || {};
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
 
   const containerRef = useRef(null);
@@ -42,17 +41,6 @@ export default function ReceiveContainer() {
   const handleOpenModal = () => {
     setTimeout(() => {
       setIsModalOpen(true);
-    }, 300);
-  };
-
-  const handleOpenSaveModal = () => {
-    setTimeout(() => {
-      setIsSaveModalOpen(true);
-    }, 300);
-  };
-  const handleCloseSaveModal = () => {
-    setTimeout(() => {
-      setIsSaveModalOpen(false);
     }, 300);
   };
 
@@ -190,7 +178,7 @@ export default function ReceiveContainer() {
         </ol>
         <div className="receiveBtnArea">
           <button onClick={handleOpenModal}>削除</button>
-          <button onClick={handleOpenSaveModal}>保存</button>
+          <button onClick={handleSave}>保存</button>
           <button>共有</button>
         </div>
       </div>
@@ -201,12 +189,12 @@ export default function ReceiveContainer() {
         onConfirm={handleDeleteAll}
         confirmText="本当に今日の記録を全て削除しますか？"
       />
-      <ConfirmWindow
+      {/* <ConfirmWindow
         isOpen={isSaveModalOpen}
         onClose={handleCloseSaveModal}
         onConfirm={handleSave}
         confirmText="今日の明細を画像として保存しますか？"
-      />
+      /> */}
     </>
   );
 }
