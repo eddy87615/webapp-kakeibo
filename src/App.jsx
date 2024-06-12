@@ -85,9 +85,7 @@ export default function App() {
   return (
     <AppProvider>
       <Router>
-        {/* {showOpenPage &&  */}
-        <OpenPage />
-        // }
+        {showOpenPage && <OpenPage />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Receive" element={<Receive />} />

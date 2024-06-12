@@ -7,7 +7,7 @@ export default function OpenPage() {
         <div className="left"></div>
         <div className="right"></div>
         <div className="openimg">
-          <img src="/public/logo.svg" alt="logo in starting page" />
+          <img src="/logo.svg" alt="logo in starting page" />
           <h1>GrandBook</h1>
           <p>収支を簡単に記録！</p>
         </div>
