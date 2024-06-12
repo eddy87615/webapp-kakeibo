@@ -55,64 +55,93 @@ export default function ReceiveContainer() {
 
   const today = new Date().toDateString() === selectedDate;
 
-  const handleSave = async () => {
+  // const handleSave = async () => {
+  //   const container = containerRef.current;
+  //   if (!container) {
+  //     console.error('Container ref is not set');
+  //     return;
+  //   }
+
+  //   const cloneContainer = container.cloneNode(true);
+  //   document.body.appendChild(cloneContainer);
+
+  //   const h1 = cloneContainer.querySelector('h1');
+  //   if (h1) {
+  //     h1.textContent = `${new Date(selectedDate).getFullYear()}年${
+  //       new Date(selectedDate).getMonth() + 1
+  //     }月${new Date(selectedDate).getDate()}日の明細`;
+  //   }
+
+  //   // 设置样式以确保克隆的容器完全展开
+  //   cloneContainer.style.position = 'absolute';
+  //   cloneContainer.style.left = '-9999px';
+  //   cloneContainer.style.top = '-9999px';
+  //   cloneContainer.style.width = `${container.scrollWidth}px`;
+  //   cloneContainer.style.height = `${container.scrollHeight}px`;
+  //   cloneContainer.style.overflow = 'visible';
+
+  //   // 隐藏删除按钮
+  //   const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
+  //   deleteBtns.forEach((btn) => {
+  //     btn.style.opacity = '0';
+  //   });
+
+  //   html2canvas(cloneContainer, {
+  //     useCORS: true,
+  //     scale: 1,
+  //   })
+  //     .then((canvas) => {
+  //       canvas.toBlob((blob) => {
+  //         const url = URL.createObjectURL(blob);
+  //         const link = document.createElement('a');
+  //         link.style.display = 'none'; // 确保链接不会在页面上显示
+  //         link.href = url;
+  //         link.download = 'downloaded_image.jpg'; // 指定下载文件名
+  //         document.body.appendChild(link); // Firefox requires the link to be in the body
+  //         link.click();
+  //         document.body.removeChild(link); // remove the link when done
+
+  //         document.body.removeChild(cloneContainer); // Remove the clone container when done
+  //       }, 'image/jpeg');
+  //     })
+  //     .catch((err) => {
+  //       console.error('html2canvas error:', err);
+  //       document.body.removeChild(cloneContainer);
+  //     });
+  // };
+
+  const handleShare = async () => {
     const container = containerRef.current;
     if (!container) {
       console.error('Container ref is not set');
       return;
     }
 
-    const cloneContainer = container.cloneNode(true);
-    document.body.appendChild(cloneContainer);
-
-    const h1 = cloneContainer.querySelector('h1');
-    if (h1) {
-      h1.textContent = `${new Date(selectedDate).getFullYear()}年${
-        new Date(selectedDate).getMonth() + 1
-      }月${new Date(selectedDate).getDate()}日の明細`;
-    }
-
-    // 设置样式以确保克隆的容器完全展开
-    cloneContainer.style.position = 'absolute';
-    cloneContainer.style.left = '-9999px';
-    cloneContainer.style.top = '-9999px';
-    cloneContainer.style.width = `${container.scrollWidth}px`;
-    cloneContainer.style.height = `${container.scrollHeight}px`;
-    cloneContainer.style.overflow = 'visible';
-
-    // 隐藏删除按钮
-    const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
-    deleteBtns.forEach((btn) => {
-      btn.style.opacity = '0';
-    });
-
     try {
       const canvas = await html2canvas(container);
-      const blob = await new Promise((resolve) =>
-        canvas.toBlob(resolve, 'image/jpeg')
-      );
-
-      if (window.showSaveFilePicker) {
-        const fileHandle = await window.showSaveFilePicker({
-          suggestedName: 'download_image.jpg',
-          type: [
-            {
-              description: 'JPEG Image',
-              accept: { 'image/jpeg': ['.jpg'] },
-            },
-          ],
+      canvas.toBlob(async (blob) => {
+        const file = new File([blob], 'share_image.jpg', {
+          type: 'image/jpeg',
         });
-        const writable = await fileHandle.createWritable();
-        await writable.write(blob);
-        await writable.close();
-        alert('File Saved Successfully!');
-      } else {
-        console.error('File System Access API is not supported!!');
-      }
-    } catch (err) {
-      console.error('Failed to save the file:', err);
-    } finally {
-      document.body.removeChild(cloneContainer); // Cleanup: remove the clone container
+        const shareData = {
+          files: [file],
+          title: 'Share Image',
+          text: 'Check out this image!',
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            console.log('Image shared successfully');
+          } catch (error) {
+            console.error('Error sharing:', error);
+          }
+        } else {
+          console.error('Web Share API is not supported in this browser.');
+        }
+      }, 'image/jpeg');
+    } catch (error) {
+      console.error('Error generating image:', error);
     }
   };
 
@@ -178,7 +207,7 @@ export default function ReceiveContainer() {
         </ol>
         <div className="receiveBtnArea">
           <button onClick={handleOpenModal}>削除</button>
-          <button onClick={handleSave}>保存</button>
+          <button onClick={handleShare}>保存</button>
           <button>共有</button>
         </div>
       </div>
