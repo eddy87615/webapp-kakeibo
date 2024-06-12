@@ -13,7 +13,7 @@ const urlsToCache = [
   '/512.png',
   '/screen01.png',
   '/screen02.png',
-  '/Group 2.svg',
+  '/logo.svg',
 ];
 
 self.addEventListener('install', (event) => {

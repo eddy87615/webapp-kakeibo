@@ -42,14 +42,20 @@ export default function App() {
       }
     };
 
-    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchstart', handleTouchStart, {
+      passive: false,
+    });
     document.addEventListener('touchend', handleTouchEnd);
-    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchstart', handleTouchStart, {
+        passive: false,
+      });
       document.removeEventListener('touchend', handleTouchEnd);
-      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchmove', handleTouchMove, {
+        passive: false,
+      });
     };
   }, []);
 
