@@ -106,7 +106,9 @@ export default function ReceiveContainer() {
       const shareData = {
         files: [file],
         title: 'Shared Image',
-        text: 'Check out this detailed image!',
+        text: `これは私の${new Date(selectedDate).getFullYear()}年${
+          new Date(selectedDate).getMonth() + 1
+        }月${new Date(selectedDate).getDate()}日の明細です！`,
       };
 
       // 使用 Web Share API 分享图像
@@ -119,10 +121,19 @@ export default function ReceiveContainer() {
       toast.success('明細が保存されました！');
     } catch (error) {
       console.error('Error generating image:', error);
-      toast.success('明細が保存できません！');
+      toast.success('明細が保存されてません！');
     } finally {
       document.body.removeChild(cloneContainer); // 清除克隆容器
     }
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'JPY',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
   };
 
   return (
@@ -154,7 +165,7 @@ export default function ReceiveContainer() {
                         : 'receiveList_plus'
                     }`}
                   >
-                    {Math.abs(entry.price)}
+                    {formatPrice(entry.price)}
                   </span>
                   <button
                     className="deleteBtn"

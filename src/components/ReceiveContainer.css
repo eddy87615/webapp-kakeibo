@@ -57,7 +57,7 @@
   padding: 2%;
 }
 
-.receiveList_minus::before {
+/* .receiveList_minus::before {
   content: '-￥';
   position: absolute;
   left: 40%;
@@ -66,7 +66,7 @@
   content: '+￥';
   position: absolute;
   left: 40%;
-}
+} */
 /* .receiveList::before {
   content: '';
   position: absolute;
