@@ -81,6 +81,7 @@ export const AppProvider = ({ children }) => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() + days);
     setCurrentDate(newDate);
+    return newDate; // 返回新的日期
   };
 
   const getMonthlyTotal = (date) => {

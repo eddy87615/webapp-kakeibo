@@ -16,7 +16,7 @@ export default function Receive() {
     <div className="receiveHome">
       <div className="headerArea">
         <HeaderBtn link="/" linkName="トップ" />
-        <CalendarBtn />
+        <CalendarBtn navigateOnDateChange={true} />
         <HeaderBtn link="/CalendarPage" linkName="カレンダー" id="calendar" />
       </div>
       <ReceiveContainer items={items} handleAddItems={handleAddItems} />
