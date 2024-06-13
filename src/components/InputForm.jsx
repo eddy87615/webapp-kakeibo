@@ -44,8 +44,8 @@ export default function InputForm() {
   }, [itemName, price, memo]);
 
   const handleSubmit = (e) => {
-    if (itemName === '' || price === '') return;
     e.preventDefault();
+    if (itemName === '' || price === '') return;
     const newItem = {
       itemName,
       price: sortMoney
