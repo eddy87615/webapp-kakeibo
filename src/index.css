@@ -65,4 +65,8 @@ html {
 
   border: 5px solid #000;
   border-radius: 15px !important;
+
+  margin-bottom: 2% !important;
+  width: 90% !important;
+  margin-inline: auto !important;
 }
