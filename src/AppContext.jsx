@@ -106,6 +106,15 @@ export const AppProvider = ({ children }) => {
     return { totalIncome, totalExpense };
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'JPY',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -120,6 +129,7 @@ export const AppProvider = ({ children }) => {
         currentDate,
         setCurrentDate,
         getMonthlyTotal,
+        formatPrice,
       }}
     >
       {children}

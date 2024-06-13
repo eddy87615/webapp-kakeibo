@@ -8,7 +8,8 @@ import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ReceiveContainer() {
-  const { items, handleDeleteItems, setCurrentDate } = useAppContext();
+  const { items, handleDeleteItems, setCurrentDate, formatPrice } =
+    useAppContext();
 
   const location = useLocation();
   const { date } = location.state || {};
@@ -127,15 +128,6 @@ export default function ReceiveContainer() {
     }
   };
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'JPY',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
   return (
     <>
       <div className="receiveandBtn">
@@ -185,14 +177,14 @@ export default function ReceiveContainer() {
           ))}
           <div className="totalPriceArea">
             <p className="totalPriceAreaTotal">
-              合計：<span>{totalIncome + totalExpense}</span>
+              合計：<span>{formatPrice(totalIncome + totalExpense)}</span>
             </p>
             <span className="line" />
             <p className="totalPriceAreaTotalExpense">
-              合計支出：<span>{totalExpense}</span>
+              合計支出：<span>{formatPrice(totalExpense)}</span>
             </p>
             <p className="totalPriceAreaTotalIncome">
-              合計収入：<span>{totalIncome}</span>
+              合計収入：<span>{formatPrice(totalIncome)}</span>
             </p>
           </div>
         </ol>

@@ -22,7 +22,7 @@ export default function Home() {
     const today = new Date().toDateString();
     setTimeout(() => {
       navigate('Receive', { state: { date: today } });
-    });
+    }, 300);
   };
 
   return (

@@ -18,6 +18,7 @@ function CalendarPage() {
     setCurrentDate,
     getMonthlyTotal,
     handleDeleteMonthData,
+    formatPrice,
   } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [displayedMonth, setDisplayedMonth] = useState(currentDate); // 新增状态来存储显示的月份
@@ -102,8 +103,8 @@ function CalendarPage() {
         />
       </div>
       <ul className="accountAll">
-        <li>月合計支出：{monthlyTotal.totalExpense}</li>
-        <li>月合計収入：{monthlyTotal.totalIncome}</li>
+        <li>月合計支出：{formatPrice(monthlyTotal.totalExpense)}</li>
+        <li>月合計収入：{formatPrice(monthlyTotal.totalIncome)}</li>
       </ul>
       <button className="todayReceive" onClick={handleTodaysList}>
         {buttonText}
