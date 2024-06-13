@@ -1,9 +1,15 @@
 import './OpenPage.css';
+import { useAppContext } from '../AppContext';
 
 export default function OpenPage() {
+  const { sortMoney } = useAppContext();
   return (
     <>
-      <div className="openpagebg">
+      <div
+        className={`${
+          sortMoney === 'false' ? 'openpagebgReverse' : 'openpagebg'
+        }`}
+      >
         <div className="left"></div>
         <div className="right"></div>
         <div className="openimg">

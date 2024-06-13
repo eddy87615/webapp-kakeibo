@@ -10,6 +10,25 @@
   overflow: hidden;
 
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+}
+.openpagebgReverse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+
+  z-index: 1;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column-reverse;
 }
 .openpagebg h1 {
   font-size: 300%;
