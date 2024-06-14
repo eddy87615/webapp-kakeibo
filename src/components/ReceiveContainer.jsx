@@ -84,6 +84,8 @@ export default function ReceiveContainer() {
     cloneContainer.style.width = `${container.scrollWidth}px`;
     cloneContainer.style.height = `${container.scrollHeight}px`;
     cloneContainer.style.overflow = 'visible';
+    const price = document.querySelector('.listPrice');
+    price.style.justyfyContent = 'end';
 
     // 隐藏删除按钮
     const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
