@@ -63,6 +63,7 @@ export const AppProvider = ({ children }) => {
   const handleDeleteItems = (index, dateKey) => {
     const newItems = { ...items };
     let removedItem;
+    let hasdeleted = false;
 
     if (newItems[dateKey]) {
       if (index !== null) {
@@ -71,44 +72,48 @@ export const AppProvider = ({ children }) => {
         if (newItems[dateKey].length === 0) {
           delete newItems[dateKey];
         }
+        hasdeleted = true;
       } else {
         // 保存删除的项目列表
         removedItem = [...newItems[dateKey]];
         delete newItems[dateKey];
+        hasdeleted = true;
       }
 
       setItems(newItems);
       localStorage.setItem('items', JSON.stringify(newItems));
 
-      // 显示带有撤销选项的 Toast
-      const toastId = toast(
-        <div className="deleteInform">
-          削除しました！
-          <button
-            onClick={() => undoDelete(index, dateKey, removedItem, toastId)}
-            style={{
-              color: '#000',
-              fontWeight: 'bold',
-              textDecoration: 'underline',
-              border: '3px solid #000',
-              borderRadius: '8px',
-              background: 'none',
-              cursor: 'pointer',
-              textDecorationLine: 'none',
-              padding: '0.3rem 1rem',
-              backgroundColor: '#93dfff',
-            }}
-          >
-            撤销
-          </button>
-        </div>,
-        {
-          closeButton: 'false',
-          type: 'success',
-          position: 'bottom-center',
-          autoClose: 3000,
-        }
-      );
+      if (hasdeleted) {
+        // 显示带有撤销选项的 Toast
+        const toastId = toast(
+          <div className="deleteInform">
+            削除しました！
+            <button
+              onClick={() => undoDelete(index, dateKey, removedItem, toastId)}
+              style={{
+                color: '#000',
+                fontWeight: 'bold',
+                textDecoration: 'underline',
+                border: '3px solid #000',
+                borderRadius: '8px',
+                background: 'none',
+                cursor: 'pointer',
+                textDecorationLine: 'none',
+                padding: '0.3rem 1rem',
+                backgroundColor: '#93dfff',
+              }}
+            >
+              撤销
+            </button>
+          </div>,
+          {
+            closeButton: 'false',
+            type: 'success',
+            position: 'bottom-center',
+            autoClose: 3000,
+          }
+        );
+      }
     }
   };
 
@@ -133,46 +138,52 @@ export const AppProvider = ({ children }) => {
   const handleDeleteMonthData = (year, month) => {
     const newItems = { ...items };
     const removedItems = {};
+    let hasdeleted = false;
+
     Object.keys(newItems).forEach((dateKey) => {
       const itemDate = new Date(dateKey);
       if (itemDate.getFullYear() === year && itemDate.getMonth() === month) {
         console.log(`Deleting data for dateKey: ${dateKey}`);
         delete newItems[dateKey];
+        hasdeleted = true;
       }
     });
     setItems(newItems);
     localStorage.setItem('items', JSON.stringify(newItems));
-    // 显示带有撤销选项的 Toast
-    const toastId = toast(
-      <div className="deleteInform">
-        <p>
-          {year}年{month + 1}月のデータを削除しました！
-        </p>
-        <button
-          onClick={() => undoDeleteMonth(year, month, removedItems, toastId)}
-          style={{
-            color: '#000',
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-            border: '3px solid #000',
-            borderRadius: '8px',
-            background: 'none',
-            cursor: 'pointer',
-            textDecorationLine: 'none',
-            padding: '0.3rem 1rem',
-            backgroundColor: '#93dfff',
-          }}
-        >
-          撤销
-        </button>
-      </div>,
-      {
-        closeButton: false,
-        type: 'success',
-        position: 'bottom-center',
-        autoClose: 30000,
-      }
-    );
+
+    if (hasdeleted) {
+      // 显示带有撤销选项的 Toast
+      const toastId = toast(
+        <div className="deleteInform">
+          <p>
+            {year}年{month + 1}月のデータを削除しました！
+          </p>
+          <button
+            onClick={() => undoDeleteMonth(year, month, removedItems, toastId)}
+            style={{
+              color: '#000',
+              fontWeight: 'bold',
+              textDecoration: 'underline',
+              border: '3px solid #000',
+              borderRadius: '8px',
+              background: 'none',
+              cursor: 'pointer',
+              textDecorationLine: 'none',
+              padding: '0.3rem 1rem',
+              backgroundColor: '#93dfff',
+            }}
+          >
+            撤销
+          </button>
+        </div>,
+        {
+          closeButton: false,
+          type: 'success',
+          position: 'bottom-center',
+          autoClose: 5000,
+        }
+      );
+    }
   };
   // 撤销删除月份数据的函数
   const undoDeleteMonth = (year, month, removedItems, toastId) => {

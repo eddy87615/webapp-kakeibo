@@ -149,6 +149,7 @@ export default function ReceiveContainer() {
                 }`}
               >
                 <li className="receiveList">
+                  <span>{String(index + 1).padStart(2, '0')}.</span>
                   <span className="listName">{entry.itemName}</span>
                   <div className="priceanddeletebtn">
                     <span
