@@ -103,7 +103,7 @@ export const AppProvider = ({ children }) => {
                 backgroundColor: '#93dfff',
               }}
             >
-              撤销
+              取消
             </button>
           </div>,
           {
@@ -173,7 +173,7 @@ export const AppProvider = ({ children }) => {
               backgroundColor: '#93dfff',
             }}
           >
-            撤销
+            取消
           </button>
         </div>,
         {

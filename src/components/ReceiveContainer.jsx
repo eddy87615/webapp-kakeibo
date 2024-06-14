@@ -88,7 +88,7 @@ export default function ReceiveContainer() {
     // 隐藏删除按钮
     const deleteBtns = cloneContainer.querySelectorAll('.deleteBtn');
     deleteBtns.forEach((btn) => {
-      btn.style.opacity = '0';
+      btn.style.display = 'none';
     });
 
     try {
