@@ -101,6 +101,7 @@ export const AppProvider = ({ children }) => {
                 textDecorationLine: 'none',
                 padding: '0.3rem 1rem',
                 backgroundColor: '#93dfff',
+                fontSize: '1.3rem',
               }}
             >
               取消
@@ -110,7 +111,7 @@ export const AppProvider = ({ children }) => {
             closeButton: 'false',
             type: 'success',
             position: 'bottom-center',
-            autoClose: 3000,
+            autoClose: 5000,
           }
         );
       }
@@ -171,6 +172,7 @@ export const AppProvider = ({ children }) => {
               textDecorationLine: 'none',
               padding: '0.3rem 1rem',
               backgroundColor: '#93dfff',
+              fontSize: '1.3rem',
             }}
           >
             取消

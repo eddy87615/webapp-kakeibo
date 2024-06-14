@@ -59,6 +59,7 @@ html {
 /* 在你的全局 CSS 文件中 */
 
 .Toastify__toast--success,
+.Toastify__toast--error,
 .deleteinform {
   background-color: #fff !important;
   color: #000 !important;

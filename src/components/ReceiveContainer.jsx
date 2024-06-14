@@ -127,7 +127,7 @@ export default function ReceiveContainer() {
       toast.success('明細が保存されました！');
     } catch (error) {
       console.error('Error generating image:', error);
-      toast.success('明細が保存されてません！');
+      toast.error('明細が保存されてません！');
     } finally {
       document.body.removeChild(cloneContainer); // 清除克隆容器
     }
@@ -211,7 +211,7 @@ export default function ReceiveContainer() {
       />
       <ToastContainer
         position="bottom-center"
-        autoClose={500}
+        autoClose={5000}
         hideProgressBar={true}
         transition={Slide}
         theme={'colored'}
