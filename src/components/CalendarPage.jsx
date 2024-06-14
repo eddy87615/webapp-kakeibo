@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../AppContext';
 import ConfirmWindow from './ConfirmWindow';
+import { ToastContainer, Slide } from 'react-toastify';
 
 function CalendarPage() {
   useEffect(() => {
@@ -114,6 +115,13 @@ function CalendarPage() {
         onClose={handleCloseMonthModal}
         onConfirm={handleDeleteCurrentMonth}
         confirmText="本当に今月の記録を全て削除しますか？"
+      />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={500}
+        hideProgressBar={true}
+        transition={Slide}
+        theme={'colored'}
       />
     </div>
   );

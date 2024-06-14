@@ -40,6 +40,7 @@
 
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 
   font-size: 150%;
   font-weight: bold;
@@ -56,28 +57,18 @@
   margin-bottom: 2%;
   padding: 2%;
 }
+.priceanddeletebtn {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
 
-/* .receiveList_minus::before {
-  content: '-￥';
-  position: absolute;
-  left: 40%;
+  width: 100%;
 }
-.receiveList_plus::before {
-  content: '+￥';
-  position: absolute;
-  left: 40%;
-} */
-/* .receiveList::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #000;
-} */
+.priceanddeletebtn span {
+  display: flex;
+  justify-content: start;
+  width: 70%;
+}
 
 .receiveDescription {
   display: block;
@@ -102,10 +93,11 @@
   color: #000;
 
   height: 30px;
+  width: 4rem;
 }
 
 .listName {
-  width: 40%;
+  width: 90%;
 
   word-break: break-all;
 }

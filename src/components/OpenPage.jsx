@@ -5,11 +5,7 @@ export default function OpenPage() {
   const { sortMoney } = useAppContext();
   return (
     <>
-      <div
-        className={`${
-          sortMoney === 'false' ? 'openpagebgReverse' : 'openpagebg'
-        }`}
-      >
+      <div className={`${sortMoney ? 'openpagebgReverse' : 'openpagebg'}`}>
         <div className="left"></div>
         <div className="right"></div>
         <div className="openimg">

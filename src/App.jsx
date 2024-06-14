@@ -14,7 +14,7 @@ export default function App() {
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       setIsShowOpenPage(false);
-    }, 3000);
+    }, 2500);
 
     return () => {
       clearTimeout(timerRef.current);

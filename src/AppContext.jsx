@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 // 建立 Context
 const AppContext = createContext();
@@ -43,24 +44,95 @@ export const AppProvider = ({ children }) => {
   };
 
   //delete
+  // const handleDeleteItems = (index, dateKey) => {
+  //   const newItems = { ...items };
+  //   if (newItems[dateKey]) {
+  //     if (index !== null) {
+  //       newItems[dateKey] = newItems[dateKey].filter((_, i) => i !== index);
+  //       if (newItems[dateKey].length === 0) {
+  //         delete newItems[dateKey];
+  //       }
+  //     } else {
+  //       delete newItems[dateKey];
+  //     }
+  //     setItems(newItems);
+  //     localStorage.setItem('items', JSON.stringify(newItems));
+  //   }
+  // };
+
   const handleDeleteItems = (index, dateKey) => {
     const newItems = { ...items };
+    let removedItem;
+
     if (newItems[dateKey]) {
       if (index !== null) {
-        newItems[dateKey] = newItems[dateKey].filter((_, i) => i !== index);
+        // 保存删除的项目
+        removedItem = newItems[dateKey].splice(index, 1)[0];
         if (newItems[dateKey].length === 0) {
           delete newItems[dateKey];
         }
       } else {
+        // 保存删除的项目列表
+        removedItem = [...newItems[dateKey]];
         delete newItems[dateKey];
       }
+
       setItems(newItems);
       localStorage.setItem('items', JSON.stringify(newItems));
+
+      // 显示带有撤销选项的 Toast
+      const toastId = toast(
+        <div className="deleteInform">
+          削除しました！
+          <button
+            onClick={() => undoDelete(index, dateKey, removedItem, toastId)}
+            style={{
+              color: '#000',
+              fontWeight: 'bold',
+              textDecoration: 'underline',
+              border: '3px solid #000',
+              borderRadius: '8px',
+              background: 'none',
+              cursor: 'pointer',
+              textDecorationLine: 'none',
+              padding: '0.3rem 1rem',
+              backgroundColor: '#93dfff',
+            }}
+          >
+            撤销
+          </button>
+        </div>,
+        {
+          closeButton: 'false',
+          type: 'success',
+          position: 'bottom-center',
+          autoClose: 3000,
+        }
+      );
     }
+  };
+
+  // 撤销删除函数
+  const undoDelete = (index, dateKey, removedItem, toastId) => {
+    const newItems = { ...items };
+
+    if (index !== null) {
+      if (!newItems[dateKey]) {
+        newItems[dateKey] = [];
+      }
+      newItems[dateKey].splice(index, 0, removedItem);
+    } else {
+      newItems[dateKey] = removedItem;
+    }
+
+    setItems(newItems);
+    localStorage.setItem('items', JSON.stringify(newItems));
+    toast.dismiss(toastId); // 仅关闭对应的通知
   };
 
   const handleDeleteMonthData = (year, month) => {
     const newItems = { ...items };
+    const removedItems = {};
     Object.keys(newItems).forEach((dateKey) => {
       const itemDate = new Date(dateKey);
       if (itemDate.getFullYear() === year && itemDate.getMonth() === month) {
@@ -70,6 +142,49 @@ export const AppProvider = ({ children }) => {
     });
     setItems(newItems);
     localStorage.setItem('items', JSON.stringify(newItems));
+    // 显示带有撤销选项的 Toast
+    const toastId = toast(
+      <div className="deleteInform">
+        <p>
+          {year}年{month + 1}月のデータを削除しました！
+        </p>
+        <button
+          onClick={() => undoDeleteMonth(year, month, removedItems, toastId)}
+          style={{
+            color: '#000',
+            fontWeight: 'bold',
+            textDecoration: 'underline',
+            border: '3px solid #000',
+            borderRadius: '8px',
+            background: 'none',
+            cursor: 'pointer',
+            textDecorationLine: 'none',
+            padding: '0.3rem 1rem',
+            backgroundColor: '#93dfff',
+          }}
+        >
+          撤销
+        </button>
+      </div>,
+      {
+        closeButton: false,
+        type: 'success',
+        position: 'bottom-center',
+        autoClose: 30000,
+      }
+    );
+  };
+  // 撤销删除月份数据的函数
+  const undoDeleteMonth = (year, month, removedItems, toastId) => {
+    const newItems = { ...items };
+
+    Object.keys(removedItems).forEach((dateKey) => {
+      newItems[dateKey] = removedItems[dateKey];
+    });
+
+    setItems(newItems);
+    localStorage.setItem('items', JSON.stringify(newItems));
+    toast.dismiss(toastId); // 仅关闭对应的通知
   };
 
   useEffect(() => {

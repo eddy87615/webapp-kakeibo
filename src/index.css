@@ -58,10 +58,12 @@ html {
 
 /* 在你的全局 CSS 文件中 */
 
-.Toastify__toast--success {
+.Toastify__toast--success,
+.deleteinform {
   background-color: #fff !important;
   color: #000 !important;
   font-weight: bold;
+  font-size: 1.3rem !important;
 
   border: 5px solid #000;
   border-radius: 15px !important;
@@ -69,4 +71,18 @@ html {
   margin-bottom: 4% !important;
   width: 90% !important;
   margin-inline: auto !important;
+}
+
+.deleteInform {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+
+  font-size: 1.3rem !important;
+}
+
+.deleteInform p {
+  padding: 0;
+  margin: 0;
+  width: 70%;
 }

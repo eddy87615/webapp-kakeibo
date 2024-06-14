@@ -150,21 +150,23 @@ export default function ReceiveContainer() {
               >
                 <li className="receiveList">
                   <span className="listName">{entry.itemName}</span>
-                  <span
-                    className={`listPrice ${
-                      entry.type === 'expense'
-                        ? 'receiveList_minus'
-                        : 'receiveList_plus'
-                    }`}
-                  >
-                    {formatPrice(entry.price)}
-                  </span>
-                  <button
-                    className="deleteBtn"
-                    onClick={() => handleDeleteItems(index, selectedDate)}
-                  >
-                    削除
-                  </button>
+                  <div className="priceanddeletebtn">
+                    <span
+                      className={`listPrice ${
+                        entry.type === 'expense'
+                          ? 'receiveList_minus'
+                          : 'receiveList_plus'
+                      }`}
+                    >
+                      {formatPrice(entry.price)}
+                    </span>
+                    <button
+                      className="deleteBtn"
+                      onClick={() => handleDeleteItems(index, selectedDate)}
+                    >
+                      削除
+                    </button>
+                  </div>
                 </li>
                 <span
                   className={`${entry.memo === '' ? '' : 'receiveDescription'}`}
@@ -203,7 +205,7 @@ export default function ReceiveContainer() {
       />
       <ToastContainer
         position="bottom-center"
-        autoClose={800}
+        autoClose={500}
         hideProgressBar={true}
         transition={Slide}
         theme={'colored'}
