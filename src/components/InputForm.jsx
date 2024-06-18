@@ -89,7 +89,7 @@ export default function InputForm() {
           <label>項目</label>
           <input
             type="text"
-            placeholder={sortMoney ? '娘からのお遣い' : '雑貨'}
+            placeholder={sortMoney ? '娘からのお小遣い' : '雑貨'}
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
           />

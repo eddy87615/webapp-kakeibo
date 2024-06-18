@@ -199,7 +199,6 @@ export default function ReceiveContainer() {
         <div className="receiveBtnArea">
           <button onClick={handleOpenModal}>削除</button>
           <button onClick={handleShare}>保存</button>
-          {/* <button>共有</button> */}
         </div>
       </div>
 
@@ -211,7 +210,7 @@ export default function ReceiveContainer() {
       />
       <ToastContainer
         position="bottom-center"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={true}
         transition={Slide}
         theme={'colored'}
